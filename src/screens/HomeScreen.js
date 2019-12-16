@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BackHandler, Alert } from 'react-native';
 import { Container, Header, Left, Icon, Right, Content, Text, Button, Grid, Row} from 'native-base';
 import { connect } from 'react-redux';
 
@@ -35,7 +36,31 @@ class HomeScreen extends Component {
     that.setState({
       lastLogin: date + ' ' + month + ' ' + year + ' - ' + hours + ':' + min + ':' + sec,
     });
+
+    BackHandler.addEventListener(
+      'hardwareBackPress',
+      this.handleBackButtonPressAndroid
+    );
   }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener(
+      'hardwareBackPress',
+      this.handleBackButtonPressAndroid
+    );
+  }
+
+  handleBackButtonPressAndroid = () => {
+    Alert.alert(
+      'Exit',
+      'Are you sure you want to exit?',
+      [
+        { text: 'Cancel', onPress: () => {} },
+        { text: 'Yes', onPress: () => {BackHandler.exitApp()}},
+      ]
+    );
+    return true;
+  };
 
   render() {
     return (
@@ -47,7 +72,7 @@ class HomeScreen extends Component {
             </Button>
           </Left>
           <Right>
-            <Button transparent onPress={() => this.props.navigation.goBack()}>
+            <Button transparent onPress={() => this.props.navigation.navigate('LoginScreen')}>
               <Icon name='exit' />
             </Button>
           </Right>
