@@ -42,7 +42,7 @@ class HomeScreen extends Component {
       <Container>
         <Header style={{backgroundColor: '#0D1322'}}>
           <Left>
-            <Button transparent>
+            <Button transparent onPress={() => this.props.navigation.toggleDrawer()}>
               <Icon name='menu' />
             </Button>
           </Left>
