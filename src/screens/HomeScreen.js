@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import { BackHandler, Alert } from 'react-native';
 import { Container, Header, Left, Icon, Right, Content, Text, Button, Grid, Row} from 'native-base';
 import { connect } from 'react-redux';
-
+import CardContent from '../components/CardContent';
 class HomeScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
         lastLogin: '',
+        post: []
     };
   }
 
@@ -41,6 +42,21 @@ class HomeScreen extends Component {
       'hardwareBackPress',
       this.handleBackButtonPressAndroid
     );
+
+    this.getMoviesFromApiAsync()
+  }
+
+  async getMoviesFromApiAsync() {
+    return fetch('https://facebook.github.io/react-native/movies.json')
+      .then((response) => response.json())
+      .then((responseJson) => {
+        this.setState({
+          post: responseJson.movies
+        })
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
   componentWillUnmount() {
@@ -84,6 +100,11 @@ class HomeScreen extends Component {
             <Row><Text style={{color: '#ffffff', fontSize: 14, alignSelf: 'center'}}>Last Login: {this.state.lastLogin}</Text></Row>
             <Row><Text style={{color: '#ffffff', fontSize: 14, alignSelf: 'center'}}>Welcome, {this.props.userId} from {this.props.companyId}</Text></Row>
           </Grid>
+          {
+            this.state.post.map(post => {
+              return  <CardContent key={post.id} title={post.title}/>
+            })
+          }
         </Content>
       </Container>
     );
