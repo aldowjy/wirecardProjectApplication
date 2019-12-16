@@ -1,17 +1,11 @@
 import React, { Component } from 'react';
 import { Container, View, Content, Thumbnail, Text, Button, Form, Input, Item, Icon} from 'native-base';
+import { connect } from 'react-redux';
+import ActionType from '../reducers/globalActionType';
 
-export default class LoginScreen extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-        companyId: '',
-        userId: '',
-    };
-  }
-
+class LoginScreen extends Component {
   render() {
-    const enabled = this.state.companyId.length > 0 && this.state.userId.length > 0;
+    const enabled = this.props.companyId.length > 0 && this.props.userId.length > 0;
     return (
       <Container style={styles.container}>
         <Content>
@@ -23,11 +17,11 @@ export default class LoginScreen extends Component {
             <Form style={{backgroundColor: '#ccc', marginTop: 20}}>
                   <Item>
                       <Icon name='briefcase' style={{color: '#0D1322'}}/>
-                      <Input placeholder="Company ID" onChangeText={(companyId) => this.setState({companyId})}/>
+                      <Input placeholder="Company ID" onChangeText={(text) => this.props.changeCompanyInput(text)}/>
                   </Item>
                   <Item last>
                       <Icon name='person' style={{color: '#0D1322'}}/>
-                      <Input placeholder="User ID" onChangeText={(userId) => this.setState({userId})}/>
+                      <Input placeholder="User ID" onChangeText={(text) => this.props.changeUserInput(text)}/>
                   </Item>
               </Form>
               <Button style={enabled ? styles.button1 : styles.button2} onPress={() => this.props.navigation.navigate('HomeScreen')} disabled={!enabled} block>
@@ -43,26 +37,43 @@ export default class LoginScreen extends Component {
   }
 }
 
+//Call global state and change to props
+const mapStateToProps = (state) => {
+  return {
+    companyId: state.userState.company.companyId,
+    userId: state.userState.userId
+  }
+}
+
+const mapDispateToProps = (dispatch) => {
+  return {
+    changeCompanyInput: (text) => {dispatch({type: ActionType.CHANGE_COMPANY_ID, text})},
+    changeUserInput: (text) => {dispatch({type: ActionType.CHANGE_USER_ID, text})}
+  }
+}
+
+export default connect(mapStateToProps, mapDispateToProps)(LoginScreen)
+
 const styles = {
-    container: {
-      backgroundColor: '#e8e8e8',
-    },
-    header: {
-      backgroundColor: '#0D1322',
-      justifyContent: 'space-around',
-      alignItems: 'center',
-      height: 250,
-    },
-    button1: {
-      marginLeft: 10,
-      marginRight: 10,
-      borderRadius: 6,
-      backgroundColor: '#0D1322',
-    },
-    button2: {
-      marginLeft: 10,
-      marginRight: 10,
-      borderRadius: 6,
-      backgroundColor: '#CCCCCC',
-    }
-  };
+  container: {
+    backgroundColor: '#e8e8e8',
+  },
+  header: {
+    backgroundColor: '#0D1322',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    height: 250,
+  },
+  button1: {
+    marginLeft: 10,
+    marginRight: 10,
+    borderRadius: 6,
+    backgroundColor: '#0D1322',
+  },
+  button2: {
+    marginLeft: 10,
+    marginRight: 10,
+    borderRadius: 6,
+    backgroundColor: '#CCCCCC',
+  }
+};

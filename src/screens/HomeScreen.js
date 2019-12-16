@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Container, Header, Left, Icon, Right, Content, Text, Button, Grid, Row} from 'native-base';
+import { connect } from 'react-redux';
 
-export default class HomeScreen extends Component {
+class HomeScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -63,3 +64,12 @@ export default class HomeScreen extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    companyId: state.userState.company.companyId,
+    userId: state.userState.userId
+  }
+}
+
+export default connect(mapStateToProps)(HomeScreen)
