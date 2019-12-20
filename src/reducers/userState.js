@@ -1,10 +1,9 @@
 const userState = {
-    userId: '',
     company: {
-        companyId: '',
-        companyName: ''
+        companyId: ''
     },
-    address: ''
+    userId: '',
+    password: ''
   }
 
 export default userState

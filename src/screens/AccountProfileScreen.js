@@ -1,20 +1,26 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
-import { Button, Text } from 'native-base';
+import { Container, Header, Left, Button, Icon, Body, Title, Right } from 'native-base';
 
 export default class AccountProfileScreen extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-    };
-  }
-
   render() {
     return (
-      <View>
-        <Text> AccountProfileScreen </Text>
-        <Button onPress={() => this.props.navigation.goBack()}><Text>BACK</Text></Button>
-      </View>
+      <Container>
+        <Header style={{backgroundColor: '#0D1322'}}>
+          <Left>
+            <Button transparent onPress={() => this.props.navigation.goBack()}>
+              <Icon name='arrow-back' />
+            </Button>
+          </Left>
+          <Body style={{alignItems: 'center'}}>
+            <Title>Account Profile Screen</Title>
+          </Body>
+          <Right>
+            <Button transparent onPress={() => this.props.navigation.navigate('HomeScreen')}>
+              <Icon name='home' />
+            </Button>
+          </Right>
+        </Header>
+      </Container>
     );
   }
 }

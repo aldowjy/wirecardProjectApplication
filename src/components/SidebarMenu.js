@@ -9,7 +9,7 @@ class SideBarMenu extends Component {
     });
     this.props.navigation.dispatch(navigateAction);
   }
-  
+
   render() {
     return (
       <Container style={styles.sideMenuContainer}>
@@ -20,6 +20,10 @@ class SideBarMenu extends Component {
               <View style={styles.menuView}>
                 <Icon name='home' style={styles.sideMenuIcon} />
                 <Text style={styles.menuText} onPress={this.navigateToScreen('HomeScreen')} > Dashboard </Text>
+              </View>
+              <View style={styles.menuView}>
+                <Icon name='send' style={styles.sideMenuIcon} />
+                <Text style={styles.menuText} onPress={this.navigateToScreen('SingleTransferScreen')} > Single Transfer </Text>
               </View>
               <View style={styles.menuView}>
                 <Icon name='person' style={styles.sideMenuIcon} />

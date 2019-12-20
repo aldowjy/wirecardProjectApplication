@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { BackHandler, Alert } from 'react-native';
-import { Container, Header, Left, Icon, Right, Content, Text, Button, Grid, Row} from 'native-base';
+import { Container, Header, Left, Icon, Right, Content, Text, Button, Grid, Row, View} from 'native-base';
 import { connect } from 'react-redux';
 import CardContent from '../components/CardContent';
+
 class HomeScreen extends Component {
   constructor(props) {
     super(props);
@@ -43,19 +44,19 @@ class HomeScreen extends Component {
       this.handleBackButtonPressAndroid
     );
 
-    this.getMoviesFromApiAsync()
+    this.getMenu()
   }
 
-  async getMoviesFromApiAsync() {
-    return fetch('https://facebook.github.io/react-native/movies.json')
+  async getMenu() {
+    return fetch('http://{YOUR_IP_ADDRESS}:3000/menu')
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({
-          post: responseJson.movies
+          post: responseJson
         })
       })
       .catch((error) => {
-        console.error(error);
+          console.log(error);
       });
   }
 
@@ -66,7 +67,7 @@ class HomeScreen extends Component {
     );
   }
 
-  handleBackButtonPressAndroid = () => {
+  handleBackButtonPressAndroid() {
     Alert.alert(
       'Exit',
       'Are you sure you want to exit?',
@@ -100,11 +101,13 @@ class HomeScreen extends Component {
             <Row><Text style={{color: '#ffffff', fontSize: 14, alignSelf: 'center'}}>Last Login: {this.state.lastLogin}</Text></Row>
             <Row><Text style={{color: '#ffffff', fontSize: 14, alignSelf: 'center'}}>Welcome, {this.props.userId} from {this.props.companyId}</Text></Row>
           </Grid>
-          {
-            this.state.post.map(post => {
-              return  <CardContent key={post.id} title={post.title}/>
-            })
-          }
+          <View style={{flex: 1, flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-around', alignContent: 'flex-start'}}>
+            {
+              this.state.post.map(post => {
+                return  <CardContent key={post.menuId} title={post.menuName} icon={post.menuIcon}/>
+              })
+            }
+          </View>
         </Content>
       </Container>
     );

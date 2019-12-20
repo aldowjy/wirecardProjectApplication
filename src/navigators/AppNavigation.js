@@ -3,6 +3,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createDrawerNavigator } from 'react-navigation-drawer';
 import Login from '../screens/LoginScreen';
 import Home from '../screens/HomeScreen';
+import SingleTransfer from '../screens/SingleTransferScreen';
 import AccountList from '../screens/AccountListScreen';
 import AccountProfile from '../screens/AccountProfileScreen';
 import SidebarMenu from '../components/SidebarMenu';
@@ -12,6 +13,12 @@ export const MainStack = createStackNavigator({
     screen: Home,
     navigationOptions: {
       title: 'Home'
+    }
+  },
+  SingleTransferScreen: {
+    screen: SingleTransfer,
+    navigationOptions: {
+      title: 'Single Transfer'
     }
   },
   AccountListScreen: {
