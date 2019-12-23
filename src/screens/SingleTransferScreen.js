@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, TouchableHighlight } from 'react-native';
+import { Modal, TouchableOpacity, TouchableHighlight } from 'react-native';
 import { Container, Content, View, Header, Left, Body, Title, Form, Item, Input, Text, Button, Icon, Right } from 'native-base';
 import OwnAccountList from '../components/OwnAccountList';
 
@@ -11,11 +11,17 @@ export default class SingleTransferScreen extends Component {
         amount: 0.0,
         post: [],
         modalVisible: false,
+        selectedItem: {},
+        name: ""
     };
   }
   
   componentDidMount() {
-    this.getAccount()
+    if (this.state.name != null) {
+      this.getAccount()
+      this.setState({name: "From Account*"});
+    }
+    
   }
 
   async getAccount() {
@@ -33,6 +39,11 @@ export default class SingleTransferScreen extends Component {
   
   setModalVisible(visible) {
     this.setState({modalVisible: visible});
+  }
+
+  handlerCheck = (data) => {
+    this.setState({name: data});
+    this.setModalVisible(false);
   }
 
   render() {
@@ -63,17 +74,17 @@ export default class SingleTransferScreen extends Component {
                 <View style ={{flex:1, justifyContent: 'flex-end'}}>
                   <View style={{justifyContent: 'space-between', borderTopLeftRadius: 20, borderTopRightRadius: 20, flexDirection: 'row', paddingHorizontal: 30, paddingVertical: 10, backgroundColor: '#f7931d'}}>
                     <Text style={{color: '#ffffff', fontWeight: 'bold'}}>From Account</Text>
-                    <TouchableHighlight
+                    <TouchableOpacity
                       onPress={() => {
                         this.setModalVisible(!this.state.modalVisible);
                       }}>
                       <Icon name='close' style={{color: '#ffffff'}}></Icon>
-                    </TouchableHighlight>
+                    </TouchableOpacity>
                   </View>
                   <View style={{backgroundColor: '#ffffff'}}>
                     {
                       this.state.post.map(post => {
-                        return <OwnAccountList key={post.Id} number={post.accountNumber} name={post.userName} currency={post.account.currency} />
+                        return <OwnAccountList key={post.id} number={post.accountNumber} name={post.userName} currency={post.account.currency} id={post.id} check={this.handlerCheck}/>
                       })
                     }
                   </View>
@@ -84,20 +95,20 @@ export default class SingleTransferScreen extends Component {
           <Form>
             <Item rounded style={{marginBottom: 20, borderColor: '#f7931d'}}>
               <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <TouchableHighlight style={{paddingVertical: 10, paddingHorizontal: 20, flex: 1}}
+                <TouchableOpacity style={{paddingVertical: 10, paddingHorizontal: 20, flex: 1}}
                   onPress={() => {
                     this.setModalVisible(true);
                   }}>
                   <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-                    <Text>From Account*</Text>
+                    <Text>{this.state.name}</Text>
                     <Icon name='search' style={{color: '#f7931d'}}></Icon>
                   </View>
-                </TouchableHighlight>
+                </TouchableOpacity>
               </View>
             </Item>
             <Item rounded style={{marginBottom: 20, borderColor: '#f7931d'}}>
               <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <TouchableHighlight style={{paddingVertical: 10, paddingHorizontal: 20, flex: 1}}
+                <TouchableOpacity style={{paddingVertical: 10, paddingHorizontal: 20, flex: 1}}
                   onPress={() => {
                     this.setModalVisible(true);
                   }}>
@@ -105,7 +116,7 @@ export default class SingleTransferScreen extends Component {
                     <Text>To Account*</Text>
                     <Icon name='search' style={{color: '#f7931d'}}></Icon>
                   </View>
-                </TouchableHighlight>
+                </TouchableOpacity>
               </View>
             </Item>
             <Item rounded style={{paddingHorizontal: 15, marginBottom: 20, borderColor: '#f7931d'}} last>

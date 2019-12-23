@@ -64,7 +64,8 @@ const mapStateToProps = (state) => {
 const mapDispateToProps = (dispatch) => {
   return {
     changeCompanyInput: (text) => {dispatch({type: ActionType.CHANGE_COMPANY_ID, text})},
-    changeUserInput: (text) => {dispatch({type: ActionType.CHANGE_USER_ID, text})}
+    changeUserInput: (text) => {dispatch({type: ActionType.CHANGE_USER_ID, text})},
+    changePasswordInput: (text) => {dispatch({type: ActionType.CHANGE_PASSWORD, text})}
   }
 }
 
