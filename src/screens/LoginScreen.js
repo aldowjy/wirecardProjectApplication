@@ -1,49 +1,65 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
-import { Container, Content, Thumbnail, Text, Button, Form, Input, Item, Icon} from 'native-base';
+import { Container, View, Content, Text, Button, Form, Icon } from 'native-base';
 import { connect } from 'react-redux';
+import { styles } from './Login/style';
+import { languages } from '../helpers/language';
 import ActionType from '../reducers/globalActionType';
+import LoginInput from './Login/LoginInput';
 
 class LoginScreen extends Component {
+  constructor(props) {
+    super(props)
+    this._handleClick = this._handleClick.bind(this)
+  }
+  
+  _handleClick() {
+    const { navigation } = this.props;
+    navigation.navigate("HomeScreen");
+  }
+
   render() {
+    const {
+      changeCompanyInput,
+      changeUserInput,
+      changePasswordInput
+    } = this.props;
+
     return (
       <Container style={styles.container}>
         <Content>
-          <View style={{flex: 1, flexDirection: 'column', justifyContent: 'space-between'}}>
+          <View style={styles.viewContainer}>
             <View style={styles.viewContent}>
               <View style={styles.viewContentHeader}>
-                <Thumbnail source={require('../assets/wirecardlogo.png')}/>
-                <Text style={{color: '#ffffff', fontWeight: 'bold'}}>LOGIN</Text>
+                <Text style={styles.viewContentHeaderWelcome}>{languages.welcome}</Text>
+                <Text style={styles.viewContentHeaderName}>{languages.bni}</Text>
+                <Text style={styles.viewContentHeaderLong}>{languages.corporate}</Text>
               </View>
               <View style={styles.viewContentBody}>
                 <Form>
-                    <Item rounded style={styles.formItem}>
-                      <Icon name='briefcase' style={styles.formIcon}/>
-                      <Input placeholder="Company ID*" onChangeText={(text) => this.props.changeCompanyInput(text)}/>
-                    </Item>
-                    <Item rounded style={styles.formItem}>
-                      <Icon name='person' style={styles.formIcon}/>
-                      <Input placeholder="User ID*" onChangeText={(text) => this.props.changeUserInput(text)}/>
-                    </Item>
-                    <Item rounded style={styles.formItem}>
-                      <Icon name='lock' style={styles.formIcon}/>
-                      <Input placeholder="Password*" onChangeText={(text) => this.props.changeUserInput(text)}/>
-                      <Icon name='eye' style={{color: '#fed9a1'}}/>
-                    </Item>
+                    <LoginInput icon="briefcase" placeholder={languages.companyId} change={changeCompanyInput}/>
+                    <LoginInput icon="person" placeholder={languages.userId} change={changeUserInput}/>
+                    <LoginInput icon="lock" placeholder={languages.password} change={changePasswordInput} isPassword/>
                 </Form>
                 <View style={styles.viewButton}>
                   <Button rounded style={styles.buttonGeneral}>
-                    <Text>Clear</Text>
+                    <Text uppercase={false}>{languages.buttonClear}</Text>
                   </Button>
-                  <Button rounded style={styles.buttonConfirm} onPress={() => this.props.navigation.navigate('HomeScreen')}>
-                    <Text>Login</Text>
+                  <Button rounded style={styles.buttonConfirm} onPress={this._handleClick}>
+                    <Text uppercase={false}>{languages.buttonLogin}</Text>
                   </Button>
                 </View>
+                <View style={styles.viewForgot}>
+                  <Icon style={styles.viewForgotIcon}name='lock'/>
+                  <View style={styles.viewText}>
+                    <Text style={styles.viewForgotTextLink}>{languages.forgot}</Text>
+                    <Text style={styles.viewForgotText}>{languages.byPressing}</Text>
+                  </View>
+                </View>
               </View>
-              <View style={styles.viewContentFooter}><Text></Text></View>
+              <View style={styles.viewContentFooter}></View>
             </View>
             <View style={styles.viewfooter}>
-              <Text style={styles.footerContent}>All rights reserved. Copyright &#169; 2018 Wirecard Technology Indonesia</Text>
+              <Text style={styles.footerContent}>{languages.loginFooterCopyright} &#169; {languages.loginFooterCompany}</Text>
             </View>
           </View>
         </Content>
@@ -70,68 +86,3 @@ const mapDispateToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps, mapDispateToProps)(LoginScreen)
-
-const styles = {
-  container: {
-    backgroundColor: '#f2e8da',
-  },
-  viewHeader: {
-    backgroundColor: '#0D1322',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    height: 250,
-  },
-  viewContent: {
-    backgroundColor: '#006884',
-    borderRadius: 20,
-    marginHorizontal: 30,
-    marginVertical: 20
-  },
-  viewContentHeader: {
-    alignItems: 'center',
-    alignSelf: 'center',
-    marginVertical: 10
-  },
-  viewContentBody: {
-    backgroundColor: 'white',
-    padding: 20
-  },
-  viewContentfooter: {
-  },
-  formItem: {
-    paddingHorizontal: 10,
-    marginBottom: 20,
-    borderColor: '#fed9a1',
-    backgroundColor: '#ffffff'
-  },
-  formIcon: {
-    color: '#fed9a1',
-    borderStyle: 'solid',
-    borderRightWidth: 1,
-    borderRightColor: '#fed9a1'
-  },
-  viewButton: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-around'
-  },
-  buttonGeneral: {
-    backgroundColor: '#f7931d',
-    width: 120,
-    height: 45,
-    justifyContent: 'center'
-  },
-  buttonConfirm: {
-    backgroundColor: '#006884',
-    width: 120,
-    height: 45,
-    justifyContent: 'center'
-  },
-  viewfooter: {
-    justifyContent: 'center'
-  },
-  footerContent: {
-    textAlign: 'center',
-    paddingHorizontal: 50
-  }
-};

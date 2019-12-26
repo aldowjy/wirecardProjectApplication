@@ -2,18 +2,44 @@ import React, { Component } from 'react';
 import { BackHandler, Alert } from 'react-native';
 import { Container, Header, Left, Icon, Right, Content, Text, Button, Grid, Row, View} from 'native-base';
 import { connect } from 'react-redux';
-import CardContent from '../components/CardContent';
+import { styles } from './Home/style';
+import { languages } from '../helpers/language';
 
 class HomeScreen extends Component {
   constructor(props) {
     super(props);
+    this._handleHomeClick = this._handleHomeClick.bind(this);
+    this._handleSideClick = this._handleSideClick.bind(this);
+    this._handleBackButtonPressAndroid = this._handleBackButtonPressAndroid.bind(this);
     this.state = {
         lastLogin: '',
         post: []
     };
   }
 
-  componentDidMount() {
+  _handleHomeClick() {
+    const { navigation } = this.props;
+    navigation.navigate("HomeScreen");
+  }
+
+  _handleSideClick() {
+    const { navigation } = this.props;
+    navigation.toggleDrawer();
+  }
+
+  _handleBackButtonPressAndroid() {
+    Alert.alert(
+      'Exit',
+      'Are you sure you want to exit?',
+      [
+        { text: 'Cancel', onPress: () => {} },
+        { text: 'Yes', onPress: () => {BackHandler.exitApp()}},
+      ]
+    );
+    return true;
+  };
+
+  _getDate() {
     var mnth = new Array();
         mnth[0] = "JAN";
         mnth[1] = "FEB";
@@ -27,7 +53,6 @@ class HomeScreen extends Component {
         mnth[9] = "OCT";
         mnth[10] = "NOV";
         mnth[11] = "DEC";
-
     var that = this;
     var date = new Date().getDate();
     var month = mnth[new Date().getMonth()];
@@ -38,26 +63,15 @@ class HomeScreen extends Component {
     that.setState({
       lastLogin: date + ' ' + month + ' ' + year + ' - ' + hours + ':' + min + ':' + sec,
     });
+  }
+
+  componentDidMount() {
+    this._getDate()
 
     BackHandler.addEventListener(
       'hardwareBackPress',
-      this.handleBackButtonPressAndroid
+      this._handleBackButtonPressAndroid
     );
-
-    this.getMenu()
-  }
-
-  async getMenu() {
-    return fetch('http://{YOUR_IP_ADDRESS}:3000/menu')
-      .then((response) => response.json())
-      .then((responseJson) => {
-        this.setState({
-          post: responseJson
-        })
-      })
-      .catch((error) => {
-          console.log(error);
-      });
   }
 
   componentWillUnmount() {
@@ -67,47 +81,28 @@ class HomeScreen extends Component {
     );
   }
 
-  handleBackButtonPressAndroid() {
-    Alert.alert(
-      'Exit',
-      'Are you sure you want to exit?',
-      [
-        { text: 'Cancel', onPress: () => {} },
-        { text: 'Yes', onPress: () => {BackHandler.exitApp()}},
-      ]
-    );
-    return true;
-  };
-
   render() {
     return (
-      <Container>
-        <Header style={{backgroundColor: '#0D1322'}}>
+      <Container style={styles.container}>
+        <Header style={styles.viewNavbar}>
           <Left>
-            <Button transparent onPress={() => this.props.navigation.toggleDrawer()}>
+            <Button transparent onPress={this._handleSideClick}>
               <Icon name='menu' />
             </Button>
           </Left>
           <Right>
-            <Button transparent onPress={() => this.props.navigation.navigate('LoginScreen')}>
+            <Button transparent onPress={this._handleHomeClick}>
               <Icon name='exit' />
             </Button>
           </Right>
         </Header>
-        <Content>
-          <Grid style={{backgroundColor: '#0D1322', height: 200, padding: 20, borderBottomRightRadius: 100}}>
-            <Row><Text style={{color: '#ffffff', fontSize: 20, fontWeight: 'bold'}}>NativePrism</Text></Row>
-            <Row><Text style={{color: '#ffffff', fontSize: 20, marginTop: -12}}>Wirecard Technology Indonesia</Text></Row>
-            <Row><Text style={{color: '#ffffff', fontSize: 14, alignSelf: 'center'}}>Last Login: {this.state.lastLogin}</Text></Row>
-            <Row><Text style={{color: '#ffffff', fontSize: 14, alignSelf: 'center'}}>Welcome, {this.props.userId} from {this.props.companyId}</Text></Row>
+        <Content style={styles.viewContent}>
+          <Grid style={styles.viewContentHeader}>
+            <Row><Text style={styles.viewContentHeader1}>{languages.title}</Text></Row>
+            <Row><Text style={styles.viewContentHeader2}>{languages.description}</Text></Row>
+            <Row><Text style={styles.viewContentHeader3}>{languages.lastLogin} {this.state.lastLogin}</Text></Row>
+            <Row><Text style={styles.viewContentHeader4}>Welcome, {this.props.userId} from {this.props.companyId}</Text></Row>
           </Grid>
-          <View style={{flex: 1, flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-around', alignContent: 'flex-start'}}>
-            {
-              this.state.post.map(post => {
-                return  <CardContent key={post.menuId} title={post.menuName} icon={post.menuIcon}/>
-              })
-            }
-          </View>
         </Content>
       </Container>
     );
