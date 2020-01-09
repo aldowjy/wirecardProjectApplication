@@ -3,11 +3,13 @@ import { BackHandler, Alert } from 'react-native';
 import { Container, Header, Left, Icon, Right, Content, Text, Button, Grid, Row, View} from 'native-base';
 import { connect } from 'react-redux';
 import { styles } from './Home/style';
+import { NavigationActions } from 'react-navigation';
 import { languages } from '../helpers/language';
 
 class HomeScreen extends Component {
   constructor(props) {
     super(props);
+    this._navigateToScreen = this._navigateToScreen.bind(this);
     this._handleHomeClick = this._handleHomeClick.bind(this);
     this._handleSideClick = this._handleSideClick.bind(this);
     this._handleBackButtonPressAndroid = this._handleBackButtonPressAndroid.bind(this);
@@ -17,9 +19,15 @@ class HomeScreen extends Component {
     };
   }
 
+  _navigateToScreen(route) {
+    const navigateAction = NavigationActions.navigate({
+        routeName: route
+    });
+    this.props.navigation.navigate(navigateAction);
+}
+
   _handleHomeClick() {
-    const { navigation } = this.props;
-    navigation.navigate("HomeScreen");
+    this._navigateToScreen("LoginScreen")
   }
 
   _handleSideClick() {

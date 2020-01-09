@@ -1,67 +1,72 @@
 {
-    "posts": [{
-            "id": 1,
-            "companyId": "company1",
-            "userId": "maker1",
-            "userName": "Sukidin",
-            "account": {
-                "amount": 200.000,
-                "currency": "IDR"
-            },
-            "accountNumber": 1201500001
-        },
-        {
-            "id": 2,
-            "companyId": "company2",
-            "userId": "maker2",
-            "userName": "Sulaiman",
-            "account": {
-                "amount": 200.000,
-                "currency": "IDR"
-            },
-            "accountNumber": 1201500001
-        },
-        {
-            "id": 3,
-            "companyId": "company3",
-            "userId": "maker3",
-            "userName": "Sulastri",
-            "account": {
-                "amount": 200.000,
-                "currency": "IDR"
-            },
-            "accountNumber": 1201500001
-        }
-    ],
-    "menu": [{
-            "menuId": 1,
-            "menuName": "Dashboard",
-            "menuIcon": "home",
-            "menuScreen": "HomeScreen"
-        },
-        {
-            "menuId": 2,
-            "menuName": "Single Transfer",
-            "menuIcon": "send",
-            "menuScreen": "SingleTranferScreen"
-        },
-        {
-            "menuId": 3,
-            "menuName": "Account Profile",
-            "menuIcon": "person",
-            "menuScreen": "AccountProfileScreen"
-        },
-        {
-            "menuId": 4,
-            "menuName": "Account list",
-            "menuIcon": "list",
-            "menuScreen": "AccountListScreen"
-        },
-        {
-            "menuId": 5,
-            "menuName": "Setting",
-            "menuIcon": "settings",
-            "menuScreen": "HomeScreen"
-        }
-    ]
+  "posts": [
+    {
+      "id": 1,
+      "companyId": "company1",
+      "userId": "maker1",
+      "userName": "Sukidin",
+      "password": 12345678,
+      "account": {
+        "amount": 200,
+        "currency": "IDR"
+      },
+      "accountNumber": 1201500001
+    },
+    {
+      "id": 2,
+      "companyId": "company2",
+      "userId": "maker2",
+      "userName": "Sulaiman",
+      "password": 12345678,
+      "account": {
+        "amount": 200,
+        "currency": "IDR"
+      },
+      "accountNumber": 1201500001
+    },
+    {
+      "id": 3,
+      "companyId": "company3",
+      "userId": "maker3",
+      "userName": "Sulastri",
+      "password": 12345678,
+      "account": {
+        "amount": 200,
+        "currency": "IDR"
+      },
+      "accountNumber": 1201500001
+    }
+  ],
+  "menu": [
+    {
+      "menuId": 1,
+      "menuName": "Dashboard",
+      "menuIcon": "home",
+      "menuScreen": "HomeScreen"
+    },
+    {
+      "menuId": 2,
+      "menuName": "Single Transfer",
+      "menuIcon": "send",
+      "menuScreen": "SingleTranferScreen"
+    },
+    {
+      "menuId": 3,
+      "menuName": "Account Profile",
+      "menuIcon": "person",
+      "menuScreen": "AccountProfileScreen"
+    },
+    {
+      "menuId": 4,
+      "menuName": "Account list",
+      "menuIcon": "list",
+      "menuScreen": "AccountListScreen"
+    },
+    {
+      "menuId": 5,
+      "menuName": "Setting",
+      "menuIcon": "settings",
+      "menuScreen": "HomeScreen"
+    }
+  ]
 }

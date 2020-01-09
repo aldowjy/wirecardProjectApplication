@@ -66,13 +66,15 @@ export const styles = {
       backgroundColor: '#f15921',
       width: 120,
       height: 40,
-      justifyContent: 'center'
+      justifyContent: 'center',
+      borderRadius: 20,
     },
     buttonConfirm: {
       backgroundColor: '#006884',
       width: 120,
       height: 40,
       justifyContent: 'center',
+      borderRadius: 20,
     },
     viewForgot: {
       flex: 1,

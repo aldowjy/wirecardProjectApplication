@@ -14,8 +14,14 @@ const dataReducer = (state = userState, action) => {
             return {...state, userId : action.text}
         case ActionType.CHANGE_PASSWORD:
             return {...state, password : action.text}
+        case ActionType.CLEAR_LOGIN_INPUT:
+            const test = {
+                ...company,
+                companyId : ''
+            }
+            return {...state, company : test, userId : '', password : ''}
         default:
-        return state
+            return state
     }
 }
 
