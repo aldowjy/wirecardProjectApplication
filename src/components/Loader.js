@@ -1,16 +1,10 @@
-import React, { Component } from 'react';
-import { Text } from 'native-base';
-import {
-  StyleSheet,
-  View,
-  Modal,
-  ActivityIndicator
-} from 'react-native';
+import React from 'react'
+import { StyleSheet, Modal, ActivityIndicator } from 'react-native'
+import { View, Text } from 'native-base'
+import { languages } from '../helpers/language';
 
 const Loader = props => {
-  const {
-    loading
-  } = props;
+  const { loading } = props;
 
   return (
     <Modal
@@ -20,7 +14,7 @@ const Loader = props => {
       onRequestClose={() => {console.log('close modal')}}>
       <View style={styles.modalBackground}>
         <View style={styles.activityIndicatorWrapper}>
-          <Text style={{fontSize: 16}}>Checking Data...</Text>
+          <Text style={{fontSize: 16}}>{languages.dataChecking}.</Text>
           <ActivityIndicator animating={loading} color={"#f15921"} size={"large"} />
         </View>
       </View>

@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import ScreenStack from './navigators/AppNavigation';
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
-import rootReducer from './reducers';
-import rootState from './reducers/rootState';
+import React, { Component } from 'react'
+import ScreenStack from './navigators/AppNavigation'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import rootReducer from './reducers'
+import rootState from './reducers/rootState'
 
 const store = createStore(rootReducer, rootState)
 

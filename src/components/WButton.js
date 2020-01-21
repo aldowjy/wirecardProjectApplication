@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import { ActivityIndicator, Alert } from 'react-native'
+import { ActivityIndicator } from 'react-native'
 import { Text, Button } from 'native-base'
-import { connect } from 'react-redux'
-import { NavigationActions } from 'react-navigation';
-import wirecardRequest from '../helpers/wirecardRequest';
+import { NavigationActions } from 'react-navigation'
+import wRequest from '../helpers/wRequest'
 
 class WButton extends Component {
     constructor(props) {
@@ -30,12 +29,11 @@ class WButton extends Component {
 
     _renderButton() {
         const {parameter} = this.props
-
         this._showLoader()
         if(this.props.isService) {
             setTimeout(() => {
-                wirecardRequest.request(parameter.url, parameter.params, () => {  this._hideLoader(); parameter.callbackSuccess() }, () => {  this._hideLoader(); parameter.callbackError() })
-            }, 2000)
+                wRequest.request(parameter.url, parameter.params, () => {  this._hideLoader(); parameter.callbackSuccess() }, () => {  this._hideLoader(); parameter.callbackError() })
+            }, 1000)
         } else {
             this._hideLoader()
             this.props.onPress()
@@ -45,13 +43,11 @@ class WButton extends Component {
     render() {
         const isLoggedIn = this.state.isLoading;
         let button;
-
         if (!isLoggedIn) {
             button = <Text uppercase={false}>{this.props.text}</Text>;
         } else {
             button = <ActivityIndicator color={"#f15921"} size={"small"} />;
         }
-
         return(
             <Button style={this.props.style} onPress={this._renderButton} >
                 {button}
@@ -60,14 +56,4 @@ class WButton extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        companyId: state.userState.company.companyId,
-        userId: state.userState.userId,
-        password: state.userState.password,
-        id: state.userState.id,
-        data: state.userState
-    }
-}
-
-export default connect(mapStateToProps)(WButton)
+export default WButton

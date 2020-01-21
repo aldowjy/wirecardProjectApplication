@@ -1,14 +1,15 @@
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
-import { createDrawerNavigator } from 'react-navigation-drawer';
-import Login from '../screens/LoginScreen';
-import Home from '../screens/HomeScreen';
-import SingleTransfer from '../screens/SingleTransferScreen';
-import AccountList from '../screens/AccountListScreen';
-import AccountProfile from '../screens/AccountProfileScreen';
-import SidebarMenu from '../components/SidebarMenu';
+import { createAppContainer } from 'react-navigation'
+import { createStackNavigator } from 'react-navigation-stack'
+import { createDrawerNavigator } from 'react-navigation-drawer'
+import Login from '../screens/LoginScreen'
+import Home from '../screens/HomeScreen'
+import SingleTransfer from '../screens/SingleTransferScreen'
+import AccountList from '../screens/AccountListScreen'
+import AccountProfile from '../screens/AccountProfileScreen'
+import AccountDetail from '../screens/AccountDetailScreen'
+import SidebarMenu from '../components/SidebarMenu'
 
-export const MainStack = createStackNavigator({
+const MainStack = createStackNavigator({
   HomeScreen: {
     screen: Home,
     navigationOptions: {
@@ -32,18 +33,24 @@ export const MainStack = createStackNavigator({
     navigationOptions: {
       title: 'Account Profile'
     }
+  },
+  AccountDetailScreen: {
+    screen: AccountDetail,
+    navigationOptions: {
+      title: 'Account Detail'
+    }
   }
 }, {
   headerMode: 'none'
-});
+})
 
-export const Drawer = createDrawerNavigator({
+const Drawer = createDrawerNavigator({
   MainStack: {
     screen: MainStack
   }
 }, {
   contentComponent: SidebarMenu
-});
+})
 
 export const ScreenStack = createStackNavigator({
   LoginScreen: {

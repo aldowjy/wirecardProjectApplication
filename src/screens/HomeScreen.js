@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { BackHandler, Alert } from 'react-native';
-import { Container, Header, Left, Icon, Right, Content, Text, Button, Grid, Row, View} from 'native-base';
-import { connect } from 'react-redux';
-import { styles } from './Home/style';
-import { NavigationActions } from 'react-navigation';
-import { languages } from '../helpers/language';
+import React, { Component } from 'react'
+import { BackHandler, Alert } from 'react-native'
+import { Container, Header, Left, Icon, Right, Content, Text, Button, Grid, Row} from 'native-base'
+import { NavigationActions } from 'react-navigation'
+import { connect } from 'react-redux'
+import { styles } from './Home/style'
+import { languages } from '../helpers/language'
 
 class HomeScreen extends Component {
   constructor(props) {
@@ -14,8 +14,7 @@ class HomeScreen extends Component {
     this._handleSideClick = this._handleSideClick.bind(this);
     this._handleBackButtonPressAndroid = this._handleBackButtonPressAndroid.bind(this);
     this.state = {
-        lastLogin: '',
-        post: []
+        lastLogin: ''
     };
   }
 
@@ -24,9 +23,10 @@ class HomeScreen extends Component {
         routeName: route
     });
     this.props.navigation.navigate(navigateAction);
-}
+  }
 
   _handleHomeClick() {
+    BackHandler.removeEventListener('hardwareBackPress',this.handleBackButtonPressAndroid);
     this._navigateToScreen("LoginScreen")
   }
 
@@ -42,7 +42,9 @@ class HomeScreen extends Component {
       [
         { text: 'Cancel', onPress: () => {} },
         { text: 'Yes', onPress: () => {BackHandler.exitApp()}},
-      ]
+      ], {
+        cancelable: false
+      }
     );
     return true;
   };
@@ -75,18 +77,11 @@ class HomeScreen extends Component {
 
   componentDidMount() {
     this._getDate()
-
-    BackHandler.addEventListener(
-      'hardwareBackPress',
-      this._handleBackButtonPressAndroid
-    );
+    BackHandler.addEventListener('hardwareBackPress',this._handleBackButtonPressAndroid);
   }
 
   componentWillUnmount() {
-    BackHandler.removeEventListener(
-      'hardwareBackPress',
-      this.handleBackButtonPressAndroid
-    );
+    BackHandler.removeEventListener('hardwareBackPress',this.handleBackButtonPressAndroid);
   }
 
   render() {
@@ -109,7 +104,7 @@ class HomeScreen extends Component {
             <Row><Text style={styles.viewContentHeader1}>{languages.title}</Text></Row>
             <Row><Text style={styles.viewContentHeader2}>{languages.description}</Text></Row>
             <Row><Text style={styles.viewContentHeader3}>{languages.lastLogin} {this.state.lastLogin}</Text></Row>
-            <Row><Text style={styles.viewContentHeader4}>Welcome, {this.props.userId} from {this.props.companyId}</Text></Row>
+            <Row><Text style={styles.viewContentHeader4}>{languages.welcoming}{this.props.userId} {languages.from} {this.props.companyId}</Text></Row>
           </Grid>
         </Content>
       </Container>

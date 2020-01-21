@@ -13,7 +13,7 @@ export default class LoginInput extends Component {
         return (
             <Item rounded style={styles.formItem}>
                 <Icon name={this.props.icon} style={styles.formIcon}/>
-                <Input placeholder={this.props.placeholder} placeholderTextColor='#cccccc' onChangeText={this.props.change} value={this.props.value} secureTextEntry={this.props.isPassword}/>
+                <Input placeholder={this.props.placeholder} placeholderTextColor='#cccccc' onChangeText={this.props.change} value={this.props.value} maxLength={this.props.maxLength} secureTextEntry={this.props.isPassword}/>
                 {this._renderEye()}
             </Item>
         );

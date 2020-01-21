@@ -1,9 +1,9 @@
 export const languages = {
     //Login Screen
     loginHeader: 'LOGIN',
-    companyId: 'Enter Company ID*',
-    userId: 'Enter User ID*',
-    password: 'Enter Password*',
+    inputCompanyId: 'Enter Company ID*',
+    inputUserId: 'Enter User ID*',
+    inputPassword: 'Enter Password*',
     buttonClear: 'Clear',
     buttonLogin: 'Login',
     welcome: 'WELCOME',
@@ -18,17 +18,43 @@ export const languages = {
     title: 'NativePrism',
     description: 'Wirecard Technology Indonesia',
     lastLogin: 'Last Login: ',
+    menu: 'MENU',
+    welcoming: 'Welcome, ',
+    from: 'from',
+    companyId: 'Company Id: ',
+    companyName: 'Company Name: ',
+    userId: 'User Id: ',
 
     singleTransfer: 'Single Transfer',
     fromAccount: 'From Account',
 
+    //Loader
+    dataChecking: 'Checking Data...',
+    
     //Button
     buttonWorkflow: 'Workflow List',
-    buttonConfirm: 'Confirm'
-}
+    buttonConfirm: 'Confirm',
 
-export const languagesHome = {
-    title: 'NativePrism',
-    description: 'Wirecard Technology Indonesia',
-    lastLogin: 'Last Login: ',
+    //Account List Screen
+    accountListHeader: 'Account List',
+
+    //Account Profile Screen
+    accountProfileHeader: 'Account Profile',
+    inputUsername: 'Enter Username',
+    inputEmail: 'Enter Email',
+    inputPhone: 'Enter Phone',
+    userIdLabel: 'User Id',
+    usernameLabel: 'Username',
+    emailLabel: 'Email',
+    phoneLabel: 'Phone',
+    changePassword: 'Change Password',
+    save: 'Save',
+    edit: 'Edit',
+
+    //Account Detail
+    accountDetailHeader: 'Account Detail',
+    ok: 'OK',
+    nameLabel: 'Name',
+    addressLabel: 'Address',
+    companyLabel: 'Company' 
 }

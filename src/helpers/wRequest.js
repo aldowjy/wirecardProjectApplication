@@ -1,4 +1,4 @@
-const wirecardRequest = {
+const wRequest = {
     request: (url, parameters, callbackSuccess, callbackError) => {
         if (parameters && typeof parameters === "string") {
             parameters = JSON.parse(parameters);
@@ -13,7 +13,7 @@ const wirecardRequest = {
             })
             .then((response) => response.json())
             .then((response) => {
-                if (response.companyId === parameters.company.companyId) {
+                if (response.userId === parameters.company.userId) {
                     callbackSuccess()
                 } else {
                     callbackError()
@@ -23,4 +23,4 @@ const wirecardRequest = {
     }
 }
 
-export default wirecardRequest
+export default wRequest

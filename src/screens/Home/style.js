@@ -5,9 +5,6 @@ export const styles = {
     viewNavbar: {
       backgroundColor: '#f7931d'
     },
-    viewContent: {
-      
-    },
     viewContentHeader: {
       backgroundColor: '#f7931d',
       height: 200,

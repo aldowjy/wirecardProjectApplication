@@ -1,40 +1,304 @@
 {
-  "posts": [
+  "users": [
     {
       "id": 1,
-      "companyId": "company1",
-      "userId": "maker1",
-      "userName": "Sukidin",
-      "password": 12345678,
-      "account": {
-        "amount": 200,
+      "name": "Leanne Graham Graham Graham Graham Graham Graham Graham",
+      "username": "Bret",
+      "userId": "bret1",
+      "email": "Sincere@april.biz",
+      "address": {
+        "street": "Kulas Light",
+        "suite": "Apt. 556",
+        "city": "Gwenborough",
+        "zipcode": "92998-3874",
+        "geo": {
+          "lat": "-37.3159",
+          "lng": "81.1496"
+        }
+      },
+      "infoAccount": {
+        "amount": 100000,
         "currency": "IDR"
       },
-      "accountNumber": 1201500001
+      "accountNumber": 3547261829,
+      "phone": "1-770-736-8031 x56442",
+      "website": "hildegard.org",
+      "company": {
+        "companyId": "RC",
+        "name": "Romaguera-Crona",
+        "catchPhrase": "Multi-layered client-server neural-net",
+        "bs": "harness real-time e-markets"
+      }
     },
     {
       "id": 2,
-      "companyId": "company2",
-      "userId": "maker2",
-      "userName": "Sulaiman",
-      "password": 12345678,
-      "account": {
-        "amount": 200,
+      "name": "Ervin Howell",
+      "username": "Antonette",
+      "userId": "antonette1",
+      "email": "Shanna@melissa.tv",
+      "address": {
+        "street": "Victor Plains",
+        "suite": "Suite 879",
+        "city": "Wisokyburgh",
+        "zipcode": "90566-7771",
+        "geo": {
+          "lat": "-43.9509",
+          "lng": "-34.4618"
+        }
+      },
+      "infoAccount": {
+        "amount": 25000,
         "currency": "IDR"
       },
-      "accountNumber": 1201500001
+      "accountNumber": 23456010247,
+      "phone": "010-692-6593 x09125",
+      "website": "anastasia.net",
+      "company": {
+        "companyId": "DC",
+        "name": "Deckow-Crist",
+        "catchPhrase": "Proactive didactic contingency",
+        "bs": "synergize scalable supply-chains"
+      }
     },
     {
       "id": 3,
-      "companyId": "company3",
-      "userId": "maker3",
-      "userName": "Sulastri",
-      "password": 12345678,
-      "account": {
-        "amount": 200,
+      "name": "Clementine Bauch",
+      "username": "Samantha",
+      "userId": "samantha1",
+      "email": "Nathan@yesenia.net",
+      "address": {
+        "street": "Douglas Extension",
+        "suite": "Suite 847",
+        "city": "McKenziehaven",
+        "zipcode": "59590-4157",
+        "geo": {
+          "lat": "-68.6102",
+          "lng": "-47.0653"
+        }
+      },
+      "infoAccount": {
+        "amount": 100,
         "currency": "IDR"
       },
-      "accountNumber": 1201500001
+      "accountNumber": 3547261829,
+      "phone": "1-463-123-4447",
+      "website": "ramiro.info",
+      "company": {
+        "companyId": "RJ",
+        "name": "Romaguera-Jacobson",
+        "catchPhrase": "Face to face bifurcated interface",
+        "bs": "e-enable strategic applications"
+      }
+    },
+    {
+      "id": 4,
+      "name": "Patricia Lebsack",
+      "username": "Karianne",
+      "userId": "karianne1",
+      "email": "Julianne.OConner@kory.org",
+      "address": {
+        "street": "Hoeger Mall",
+        "suite": "Apt. 692",
+        "city": "South Elvis",
+        "zipcode": "53919-4257",
+        "geo": {
+          "lat": "29.4572",
+          "lng": "-164.2990"
+        }
+      },
+      "infoAccount": {
+        "amount": 220000,
+        "currency": "IDR"
+      },
+      "accountNumber": 423617452824,
+      "phone": "493-170-9623 x156",
+      "website": "kale.biz",
+      "company": {
+        "companyId": "RC",
+        "name": "Robel-Corkery",
+        "catchPhrase": "Multi-tiered zero tolerance productivity",
+        "bs": "transition cutting-edge web services"
+      }
+    },
+    {
+      "id": 5,
+      "name": "Chelsey Dietrich",
+      "username": "Kamren",
+      "userId": "kamren1",
+      "email": "Lucio_Hettinger@annie.ca",
+      "address": {
+        "street": "Skiles Walks",
+        "suite": "Suite 351",
+        "city": "Roscoeview",
+        "zipcode": "33263",
+        "geo": {
+          "lat": "-31.8129",
+          "lng": "62.5342"
+        }
+      },
+      "infoAccount": {
+        "amount": 450000,
+        "currency": "IDR"
+      },
+      "accountNumber": 87523513904,
+      "phone": "(254)954-1289",
+      "website": "demarco.info",
+      "company": {
+        "companyId": "KL",
+        "name": "Keebler LLC",
+        "catchPhrase": "User-centric fault-tolerant solution",
+        "bs": "revolutionize end-to-end systems"
+      }
+    },
+    {
+      "id": 6,
+      "name": "Mrs. Dennis Schulist",
+      "username": "Leopoldo_Corkery",
+      "userId": "leopoldo1",
+      "email": "Karley_Dach@jasper.info",
+      "address": {
+        "street": "Norberto Crossing",
+        "suite": "Apt. 950",
+        "city": "South Christy",
+        "zipcode": "23505-1337",
+        "geo": {
+          "lat": "-71.4197",
+          "lng": "71.7478"
+        }
+      },
+      "infoAccount": {
+        "amount": 56000,
+        "currency": "IDR"
+      },
+      "accountNumber": 454268425824,
+      "phone": "1-477-935-8478 x6430",
+      "website": "ola.org",
+      "company": {
+        "companyId": "CL",
+        "name": "Considine-Lockman",
+        "catchPhrase": "Synchronised bottom-line interface",
+        "bs": "e-enable innovative applications"
+      }
+    },
+    {
+      "id": 7,
+      "name": "Kurtis Weissnat",
+      "username": "Elwyn.Skiles",
+      "userId": "elwyn1",
+      "email": "Telly.Hoeger@billy.biz",
+      "address": {
+        "street": "Rex Trail",
+        "suite": "Suite 280",
+        "city": "Howemouth",
+        "zipcode": "58804-1099",
+        "geo": {
+          "lat": "24.8918",
+          "lng": "21.8984"
+        }
+      },
+      "infoAccount": {
+        "amount": 87000,
+        "currency": "IDR"
+      },
+      "accountNumber": 97632164744,
+      "phone": "210.067.6132",
+      "website": "elvis.io",
+      "company": {
+        "companyId": "JG",
+        "name": "Johns Group",
+        "catchPhrase": "Configurable multimedia task-force",
+        "bs": "generate enterprise e-tailers"
+      }
+    },
+    {
+      "id": 8,
+      "name": "Nicholas Runolfsdottir V",
+      "username": "Maxime_Nienow",
+      "userId": "maxime",
+      "email": "Sherwood@rosamond.me",
+      "address": {
+        "street": "Ellsworth Summit",
+        "suite": "Suite 729",
+        "city": "Aliyaview",
+        "zipcode": "45169",
+        "geo": {
+          "lat": "-14.3990",
+          "lng": "-120.7677"
+        }
+      },
+      "infoAccount": {
+        "amount": 12000,
+        "currency": "IDR"
+      },
+      "accountNumber": 7639565614,
+      "phone": "586.493.6943 x140",
+      "website": "jacynthe.com",
+      "company": {
+        "companyId": "AG",
+        "name": "Abernathy Group",
+        "catchPhrase": "Implemented secondary concept",
+        "bs": "e-enable extensible e-tailers"
+      }
+    },
+    {
+      "id": 9,
+      "name": "Glenna Reichert",
+      "username": "Delphine",
+      "userId": "delphine1",
+      "email": "Chaim_McDermott@dana.io",
+      "address": {
+        "street": "Dayna Park",
+        "suite": "Suite 449",
+        "city": "Bartholomebury",
+        "zipcode": "76495-3109",
+        "geo": {
+          "lat": "24.6463",
+          "lng": "-168.8889"
+        }
+      },
+      "infoAccount": {
+        "amount": 500000,
+        "currency": "IDR"
+      },
+      "accountNumber": 1252617486,
+      "phone": "(775)976-6794 x41206",
+      "website": "conrad.com",
+      "company": {
+        "companyId": "YS",
+        "name": "Yost and Sons",
+        "catchPhrase": "Switchable contextually-based project",
+        "bs": "aggregate real-time technologies"
+      }
+    },
+    {
+      "id": 10,
+      "name": "Clementina DuBuque",
+      "username": "Moriah.Stanton",
+      "userId": "moriah1",
+      "email": "Rey.Padberg@karina.biz",
+      "address": {
+        "street": "Kattie Turnpike",
+        "suite": "Suite 198",
+        "city": "Lebsackbury",
+        "zipcode": "31428-2261",
+        "geo": {
+          "lat": "-38.2386",
+          "lng": "57.2232"
+        }
+      },
+      "infoAccount": {
+        "amount": 45000,
+        "currency": "IDR"
+      },
+      "accountNumber": 86046452873,
+      "phone": "024-648-3804",
+      "website": "ambrose.net",
+      "company": {
+        "companyId": "HL",
+        "name": "Hoeger LLC",
+        "catchPhrase": "Centralized empowering task-force",
+        "bs": "target end-to-end models"
+      }
     }
   ],
   "menu": [
@@ -48,7 +312,7 @@
       "menuId": 2,
       "menuName": "Single Transfer",
       "menuIcon": "send",
-      "menuScreen": "SingleTranferScreen"
+      "menuScreen": "SingleTransferScreen"
     },
     {
       "menuId": 3,
@@ -61,12 +325,6 @@
       "menuName": "Account list",
       "menuIcon": "list",
       "menuScreen": "AccountListScreen"
-    },
-    {
-      "menuId": 5,
-      "menuName": "Setting",
-      "menuIcon": "settings",
-      "menuScreen": "HomeScreen"
     }
   ]
 }
