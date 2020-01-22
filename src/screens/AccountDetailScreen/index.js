@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Container, Header, View, Left, Button, Icon, Body, Title, Right, Text } from 'native-base';
-import { styles } from './AccountDetail/style'
-import { languages } from '../helpers/language';
+import { styles } from './style'
+import { languages } from '../../helpers/language';
 
 export default class AccountDetailScreen extends Component {
     render() {

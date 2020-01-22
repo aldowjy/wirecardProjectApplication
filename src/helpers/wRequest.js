@@ -1,11 +1,12 @@
-const wRequest = {
-    request: (url, parameters, callbackSuccess, callbackError) => {
-        if (parameters && typeof parameters === "string") {
-            parameters = JSON.parse(parameters);
+export async function callService(url, method, params, callbackSuccess, callbackError) {
+    console.log('start ....');
+    setTimeout(() => {
+        if (params && typeof params === "string") {
+            params = JSON.parse(params);
         }
         return (
-            fetch(url + parameters.id, {
-                method: 'GET',
+            fetch(url, {
+                method: method,
                 headers: {
                     Accept: 'application/json',
                     'Content-Type': 'application/json',
@@ -13,14 +14,14 @@ const wRequest = {
             })
             .then((response) => response.json())
             .then((response) => {
-                if (response.userId === parameters.company.userId) {
+                if (response) {
                     callbackSuccess()
                 } else {
                     callbackError()
                 }
             })
+            .catch((error => console.log(error)))
         )
-    }
+    }, 2000)
+    console.log('done ....');
 }
-
-export default wRequest

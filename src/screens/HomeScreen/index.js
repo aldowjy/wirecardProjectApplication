@@ -3,8 +3,8 @@ import { BackHandler, Alert } from 'react-native'
 import { Container, Header, Left, Icon, Right, Content, Text, Button, Grid, Row} from 'native-base'
 import { NavigationActions } from 'react-navigation'
 import { connect } from 'react-redux'
-import { styles } from './Home/style'
-import { languages } from '../helpers/language'
+import { styles } from './style'
+import { languages } from '../../helpers/language'
 
 class HomeScreen extends Component {
   constructor(props) {

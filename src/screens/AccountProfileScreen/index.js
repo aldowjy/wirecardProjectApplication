@@ -3,8 +3,8 @@ import { TouchableOpacity } from 'react-native'
 import { Container, View, Header, Content, Form, Thumbnail, Left, Button, Icon, Body, Title, Right, Item, Label, Input, Text } from 'native-base'
 import { Alert } from 'react-native'
 import ImagePicker from 'react-native-image-picker'
-import { languages } from '../helpers/language'
-import { styles } from './AccountProfile/style'
+import { languages } from '../../helpers/language'
+import { styles } from './style'
 
 class AccountProfileScreen extends Component {
   constructor(props) {
