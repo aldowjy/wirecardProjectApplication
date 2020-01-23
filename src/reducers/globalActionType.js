@@ -1,8 +1,0 @@
-const ActionType = {
-    CHANGE_COMPANY_ID: 'CHANGE_COMPANY_ID',
-    CHANGE_USER_ID: 'CHANGE_USER_ID',
-    CHANGE_PASSWORD: 'CHANGE_PASSWORD',
-    CLEAR_LOGIN_INPUT: 'CLEAR_LOGIN_INPUT'
-}
-
-export default ActionType;

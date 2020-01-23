@@ -3,13 +3,13 @@ import { TouchableOpacity } from 'react-native'
 import { Container, Content, View, Text, Icon } from 'native-base';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
+import { languages } from '../helpers/language';
 
 class SideBarMenu extends Component {
   constructor(props) {
     super(props)
     this.state = {
-       postMenu: [],
-       postAccount: []
+       postMenu: []
     }
   }
   
@@ -28,68 +28,47 @@ class SideBarMenu extends Component {
           postMenu: responseJson
         })
       })
-      .catch((error) => {
-          console.log(error);
-      });
-  }
-
-  async _getAccount() {
-    return fetch('http://10.247.39.83:3000/post')
-      .then((response) => response.json())
-      .then((responseJson) => {
-        this.setState({
-          postAccount: responseJson
-        })
-      })
-      .catch((error) => {
-          console.log(error);
-      });
   }
 
   componentDidMount() {
     this._getMenu();
-    this._getAccount();
   }
 
   render() {
     return (
       <Container style={styles.container}>
         <View style={styles.titleBar}>
-          <Text style={{color: '#fff'}}>MENU</Text>
-          <Icon style={{color: '#fff'}} name='close'/>
+          <Text style={{color: '#fff'}}>{languages.menu}</Text>
+          <Icon style={{color: '#fff'}} name='close' onPress={() => this.props.navigation.closeDrawer()}/>
         </View>
         <View style={styles.headerBar}>
-          <View style={{backgroundColor: '#006884', paddingVertical: 8, paddingHorizontal: 20, borderRightWidth:3, borderRightColor: '#9ed3f1'}}>
-            <Icon style={{color: '#ffffff'}} name='person'/>
+          <View style={styles.headerLogoBar}>
+            <Icon style={{color: '#fff'}} name='person'/>
           </View>
-          <View style={{backgroundColor: '', paddingHorizontal: 15, flexDirection:'row'}}>
-            <Text style={{color: '#006884'}}>Welcome, </Text>
+          <View style={styles.viewWelcome}>
+            <Text style={{color: '#006884'}}>{languages.welcoming}</Text>
             <Text style={{color: '#006884', fontWeight: 'bold'}}>{this.props.userId}</Text>
           </View>
         </View>
         <View style={styles.statusBar}>
           <View style={styles.viewStatus}>
-            <Text style={styles.viewLabel}>Company ID:&emsp;&emsp;&emsp;</Text>
+            <Text style={styles.viewLabel}>{languages.companyId}&emsp;&emsp;&emsp;</Text>
             <Text style={styles.viewValue}>{this.props.companyId}</Text>
           </View>
           <View style={styles.viewStatus}>
-            <Text style={styles.viewLabel}>Company Name:&emsp;</Text>
-            <Text style={styles.viewValue}>Company 1</Text>
+            <Text style={styles.viewLabel}>{languages.companyName}&emsp;</Text>
+            <Text style={styles.viewValue}>{this.props.companyName}</Text>
           </View>
           <View style={styles.viewStatus}>
-            <Text style={styles.viewLabel}>User ID:&emsp;&emsp;&emsp;&emsp;&emsp;</Text>
+            <Text style={styles.viewLabel}>{languages.userId}&emsp;&emsp;&emsp;&emsp;&emsp;</Text>
             <Text style={styles.viewValue}>{this.props.userId}</Text>
           </View>
         </View>
         <Content style={styles.menuBar}>
           <View style={{width: '100%'}}>
-              {/* <View style={styles.menuView}>
-                <Icon name='home' style={styles.sideMenuIcon} />
-                <Text style={styles.menuText} onPress={this.navigateToScreen('HomeScreen')} > Dashboard </Text>
-              </View> */}
               {
                 this.state.postMenu.map(post => {
-                  return <TouchableOpacity onPress={this.navigateToScreen('SingleTransferScreen')}>
+                  return <TouchableOpacity onPress={this.navigateToScreen(post.menuScreen)} key={post.menuId}>
                             <View style={styles.menuView}>
                               <Icon name={post.menuIcon} style={styles.sideMenuIcon}/>
                               <Text style={styles.menuText}>{post.menuName}</Text>
@@ -107,6 +86,7 @@ class SideBarMenu extends Component {
 const mapStateToProps = (state) => {
   return {
     companyId: state.userState.company.companyId,
+    companyName: state.userState.company.name,
     userId: state.userState.userId
   }
 }
@@ -133,11 +113,22 @@ const styles = {
     width: '100%',
     alignItems: 'center'
   },
+  headerLogoBar: {
+    backgroundColor: '#006884',
+    paddingVertical: 8,
+    paddingHorizontal: 20,
+    borderRightWidth:3,
+    borderRightColor: '#9ed3f1'
+  },
   statusBar: {
     backgroundColor: '#fed9a1',
     paddingLeft: 75,
     paddingRight: 10,
     paddingVertical: 5,
+  },
+  viewWelcome: {
+    paddingHorizontal: 15,
+    flexDirection:'row'
   },
   viewStatus: {
     flexDirection:'row',
