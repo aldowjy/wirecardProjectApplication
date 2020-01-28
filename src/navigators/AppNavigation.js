@@ -7,6 +7,7 @@ import SingleTransfer from '../screens/SingleTransferScreen'
 import AccountList from '../screens/AccountListScreen'
 import AccountProfile from '../screens/AccountProfileScreen'
 import AccountDetail from '../screens/AccountDetailScreen'
+import ChangePassword from '../screens/ChangePasswordScreen'
 import SidebarMenu from '../components/SidebarMenu'
 
 const MainStack = createStackNavigator({
@@ -38,6 +39,12 @@ const MainStack = createStackNavigator({
     screen: AccountDetail,
     navigationOptions: {
       title: 'Account Detail'
+    }
+  },
+  ChangePasswordScreen: {
+    screen: ChangePassword,
+    navigationOptions: {
+      title: 'Change Password'
     }
   }
 }, {

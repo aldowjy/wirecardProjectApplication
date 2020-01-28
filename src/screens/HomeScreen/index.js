@@ -77,11 +77,11 @@ class HomeScreen extends Component {
 
   componentDidMount() {
     this._getDate()
-    BackHandler.addEventListener('hardwareBackPress',this._handleBackButtonPressAndroid);
+    // BackHandler.addEventListener('hardwareBackPress',this._handleBackButtonPressAndroid);
   }
 
   componentWillUnmount() {
-    BackHandler.removeEventListener('hardwareBackPress',this.handleBackButtonPressAndroid);
+    // BackHandler.removeEventListener('hardwareBackPress',this.handleBackButtonPressAndroid);
   }
 
   render() {
@@ -104,7 +104,7 @@ class HomeScreen extends Component {
             <Row><Text style={styles.viewContentHeader1}>{languages.title}</Text></Row>
             <Row><Text style={styles.viewContentHeader2}>{languages.description}</Text></Row>
             <Row><Text style={styles.viewContentHeader3}>{languages.lastLogin} {this.state.lastLogin}</Text></Row>
-            <Row><Text style={styles.viewContentHeader4}>{languages.welcoming}{this.props.userId} {languages.from} {this.props.companyId}</Text></Row>
+            {/* <Row><Text style={styles.viewContentHeader4}>{languages.welcoming}{this.props.userId} {languages.from} {this.props.companyId}</Text></Row> */}
           </Grid>
         </Content>
       </Container>
@@ -112,11 +112,11 @@ class HomeScreen extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    companyId: state.userState.company.companyId,
-    userId: state.userState.userId
-  }
-}
+// const mapStateToProps = (state) => {
+//   return {
+//     companyId: state.userState.company.companyId,
+//     userId: state.userState.userId
+//   }
+// }
 
-export default connect(mapStateToProps)(HomeScreen)
+export default HomeScreen

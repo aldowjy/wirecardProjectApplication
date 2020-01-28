@@ -38,24 +38,7 @@ export const styles = {
   viewContentFooter: {
     height: 20,
   },
-  formItem: {
-    paddingHorizontal: 10,
-    marginBottom: 15,
-    fontSize: 10,
-    borderColor: '#fed9a1',
-    backgroundColor: '#ffffff',
-    borderStyle: 'solid',
-    borderTopWidth: 2,
-    borderBottomWidth: 2,
-    borderRightWidth: 2,
-    borderLeftWidth: 2,
-  },
-  formIcon: {
-    color: '#fed9a1',
-    borderStyle: 'solid',
-    borderRightWidth: 1,
-    borderRightColor: '#fed9a1'
-  },
+
   viewButton: {
     flex: 1,
     flexDirection: 'row',

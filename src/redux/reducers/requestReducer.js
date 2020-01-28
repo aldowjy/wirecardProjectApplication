@@ -1,4 +1,4 @@
-import requestState from '../states/requeststate';
+import requestState from '../states/requestState';
 import { START_REQUEST, DONE_REQUEST } from '../types';
 
 export function requestReducers(state = requestState, actions) {

@@ -1,5 +1,5 @@
 
-import loginState from '../states'
+import loginState from '../states/loginState';
 import { SET_LOGIN, SET_LOGOUT } from '../types';
 
 function getCurrentDate(){

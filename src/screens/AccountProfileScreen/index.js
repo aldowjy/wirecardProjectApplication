@@ -112,24 +112,24 @@ class AccountProfileScreen extends Component {
             <Form>
                 <Item fixedLabel style={styles.inputItem}>
                   <Label>{languages.userIdLabel}</Label>
-                  <Input placeholder={languages.inputUserId} onChangeText={(userId) => this.setState({userId})} value={this.state.userId} style={isEdit ? '' : styles.inputEdit} disabled={this.state.isEdit}/>
+                  <Input placeholder={languages.inputUserId} onChangeText={(userId) => this.setState({userId})} value={this.state.userId} style={isEdit ? null : styles.inputEdit} disabled={this.state.isEdit}/>
                 </Item>
                 <Item fixedLabel style={styles.inputItem}>
                   <Label>{languages.usernameLabel}</Label>
-                  <Input placeholder={languages.inputUsername}  onChangeText={(userName) => this.setState({userName})} value={this.state.userName} style={isEdit ? '' : styles.inputEdit} disabled={this.state.isEdit}/>
+                  <Input placeholder={languages.inputUsername}  onChangeText={(userName) => this.setState({userName})} value={this.state.userName} style={isEdit ? null : styles.inputEdit} disabled={this.state.isEdit}/>
                 </Item>
                 <Item fixedLabel style={styles.inputItem}>
                   <Label>{languages.emailLabel}</Label>
-                  <Input placeholder={languages.inputEmail}  onChangeText={(email) => this.setState({email})} value={this.state.email} style={isEdit ? '' : styles.inputEdit} disabled={this.state.isEdit}/>
+                  <Input placeholder={languages.inputEmail}  onChangeText={(email) => this.setState({email})} value={this.state.email} style={isEdit ? null : styles.inputEdit} disabled={this.state.isEdit}/>
                 </Item>
                 <Item fixedLabel style={styles.inputItem}>
                   <Label>{languages.phoneLabel}</Label>
-                  <Input placeholder={languages.inputPhone}  onChangeText={(phone) => this.setState({phone})} value={this.state.phone} style={isEdit ? '' : styles.inputEdit} disabled={this.state.isEdit}/>
+                  <Input placeholder={languages.inputPhone}  onChangeText={(phone) => this.setState({phone})} value={this.state.phone} style={isEdit ? null : styles.inputEdit} disabled={this.state.isEdit}/>
                 </Item>
             </Form>
             <View style={styles.viewButton}>
               {button}
-              <Button rounded success style={styles.buttonChange} onPress={() => Alert.alert('Alert', 'Comming Soon!')}><Text>{languages.changePassword}</Text></Button>
+              <Button rounded success style={styles.buttonChange} onPress={() => this.props.navigation.navigate('ChangePasswordScreen')}><Text>{languages.changePassword}</Text></Button>
             </View>
           </View>
         </Content>

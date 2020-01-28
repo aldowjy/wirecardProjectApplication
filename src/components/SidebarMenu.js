@@ -21,7 +21,7 @@ class SideBarMenu extends Component {
   }
 
   async _getMenu() {
-    return fetch('http://127.0.0.1:3000/menu')
+    return fetch('http://102.27.1.1:3000/menu')
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({
@@ -47,21 +47,21 @@ class SideBarMenu extends Component {
           </View>
           <View style={styles.viewWelcome}>
             <Text style={{color: '#006884'}}>{languages.welcoming}</Text>
-            <Text style={{color: '#006884', fontWeight: 'bold'}}>{this.props.userId}</Text>
+            <Text style={{color: '#006884', fontWeight: 'bold'}}>userId</Text>
           </View>
         </View>
         <View style={styles.statusBar}>
           <View style={styles.viewStatus}>
             <Text style={styles.viewLabel}>{languages.companyId}&emsp;&emsp;&emsp;</Text>
-            <Text style={styles.viewValue}>{this.props.companyId}</Text>
+            <Text style={styles.viewValue}>companyId</Text>
           </View>
           <View style={styles.viewStatus}>
             <Text style={styles.viewLabel}>{languages.companyName}&emsp;</Text>
-            <Text style={styles.viewValue}>{this.props.companyName}</Text>
+            <Text style={styles.viewValue}>companyName</Text>
           </View>
           <View style={styles.viewStatus}>
             <Text style={styles.viewLabel}>{languages.userId}&emsp;&emsp;&emsp;&emsp;&emsp;</Text>
-            <Text style={styles.viewValue}>{this.props.userId}</Text>
+            <Text style={styles.viewValue}>userId</Text>
           </View>
         </View>
         <Content style={styles.menuBar}>
@@ -83,15 +83,15 @@ class SideBarMenu extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    companyId: state.userState.company.companyId,
-    companyName: state.userState.company.name,
-    userId: state.userState.userId
-  }
-}
+// const mapStateToProps = (state) => {
+//   return {
+//     companyId: state.userState.company.companyId,
+//     companyName: state.userState.company.name,
+//     userId: state.userState.userId
+//   }
+// }
 
-export default connect(mapStateToProps)(SideBarMenu)
+export default SideBarMenu
 
 const styles = {
   container: {

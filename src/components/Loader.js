@@ -1,17 +1,13 @@
-import React from 'react'
-import { StyleSheet, Modal, ActivityIndicator } from 'react-native'
-import { View, Text } from 'native-base'
+import React from 'react';
+import { StyleSheet, Modal, ActivityIndicator } from 'react-native';
+import { View, Text } from 'native-base';
 import { languages } from '../helpers/language';
 
 const Loader = props => {
   const { loading } = props;
 
   return (
-    <Modal
-      transparent={true}
-      animationType={'none'}
-      visible={loading}
-      onRequestClose={() => {console.log('close modal')}}>
+    <Modal transparent={true} animationType={'none'} visible={true}>
       <View style={styles.modalBackground}>
         <View style={styles.activityIndicatorWrapper}>
           <Text style={{fontSize: 16}}>{languages.dataChecking}.</Text>
@@ -21,6 +17,8 @@ const Loader = props => {
     </Modal>
   )
 }
+
+export default Loader;
 
 const styles = StyleSheet.create({
   modalBackground: {
@@ -47,5 +45,3 @@ const styles = StyleSheet.create({
     elevation: 24,
   }
 });
-
-export default Loader;

@@ -1,10 +1,13 @@
-import React, { Component } from 'react'
-import { Container, Header, View, Left, Button, Icon, Body, Title, Right, Card, CardItem, Text } from 'native-base'
-import { TouchableOpacity, ScrollView } from 'react-native'
-import { styles } from './style'
-import { languages } from '../../helpers/language'
-
-export default class AccountListScreen extends Component {
+import React, { Component } from 'react';
+import { Container, Header, View, Left, Button, Icon, Body, Title, Right, Card, CardItem, Text } from 'native-base';
+import { TouchableOpacity, ScrollView } from 'react-native';
+import { styles } from './style';
+import { languages } from '../../helpers/language';
+import { bindActionCreators } from "redux";
+import { connect } from 'react-redux';
+import Loader from '../../components/Loader';
+import { loadAccountList, loadMoreAccount } from "../../redux/actions/accountListAction";
+class AccountListScreen extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -13,14 +16,13 @@ export default class AccountListScreen extends Component {
        loading: false,
        current_page: 1,
        error: null,
-       hasMore: true
+       hasMore: true,
     }
   }
 
   _getAccountList() {
     if (this.state.loading) { return; }
     const current = this.state.current_page;
-    console.log("CURRENT", current)
     return fetch('https://reqres.in/api/users?page='+current)
       .then((response) => response.json())
       .then((response) => {
@@ -41,7 +43,7 @@ export default class AccountListScreen extends Component {
   }
 
   _handleGetDetail(data) {
-    return fetch('http://127.0.0.1:3000/users' + data)
+    return fetch('http://102.27.1.1:3000/' + data)
     .then((response) => response.json())
     .then((responseJson) => {
       this.setState({
@@ -52,15 +54,7 @@ export default class AccountListScreen extends Component {
   }
 
   _renderList() {
-    var _getInitials = function(string) {
-      var names = string.split(' '),
-          initials = names[0].substring(0, 1).toUpperCase();
-      if (names.length > 1) {
-          initials += names[names.length - 1].substring(0, 1).toUpperCase();
-      }
-      return initials;
-    };
-    return ( this.state.accountList.map((data) => {
+    return ( this.props.accountList.map((data) => {
       return ( 
         <TouchableOpacity key={data.id}>
               <Card style={{padding: 50}}>
@@ -84,11 +78,47 @@ export default class AccountListScreen extends Component {
     return layoutMeasurement.height + contentOffset.y >= contentSize.height - 50;
   }
   
-  componentWillMount() {
-    this._getAccountList();
+  // componentWillMount() {
+  //   this._getAccountList();
+  // }
+
+  componentDidMount() {
+    const { fetchActionCreator } = this.props;
+    console.log("List of Account: ", this.props.accountList)
+    fetchActionCreator();
   }
 
+  handleScroll = (event) => {
+    const { loadMoreActionCreator, totalPages } = this.props;
+    if (event.nativeEvent.layoutMeasurement.height + event.nativeEvent.contentOffset.y >= event.nativeEvent.contentSize.height - 50 && this.state.current_page < totalPages) {
+      this.setState({
+        current_page: this.state.current_page + 1,
+      }, () => loadMoreActionCreator(this.state.current_page));
+    }
+  };
+
+  AccountListItem = (id, email, first_name) => {
+    return (
+      <TouchableOpacity key={id}>
+          <Card style={{padding: 50}}>
+            <CardItem>
+              <Left>
+                <View style={styles.cardImage}>
+                    <Text style={styles.cardInitial}>{id}</Text>
+                </View>
+                <Body>
+                  <Text note>{email}</Text>
+                  <Text>{first_name}</Text>
+                </Body>
+              </Left>
+            </CardItem>
+          </Card>
+    </TouchableOpacity>)}
+
   render() {
+    const { isLoading, error, accountList } = this.props;
+    if (isLoading) return <Loader />
+    if (error) return <Text>Error</Text>
 
     return (
       <Container>
@@ -107,35 +137,53 @@ export default class AccountListScreen extends Component {
             </Button>
           </Right>
         </Header>
-        {/* <ScrollView>
-          {
-            this.state.accountList.map(post => {
-              return <TouchableOpacity key={post.id} style={styles.card} onPress={() => this._handleGetDetail(post.id)}>
-                        <Card>
-                          <CardItem>
-                            <Left>
-                              <View style={styles.cardImage}>
-                                  <Text style={styles.cardInitial}>{getInitials(post.name)}</Text>
-                              </View>
-                              <Body>
-                                <Text>{post.name}</Text>
-                                <Text note>{post.email}</Text>
-                                <Text>{post.phone}</Text>
-                              </Body>
-                            </Left>
-                          </CardItem>
-                        </Card>
-                      </TouchableOpacity>
-            })
-          }
-        </ScrollView> */}
-        <ScrollView onScroll={({ nativeEvent }) => {
-          if (this._isCloseToBottom(nativeEvent) && this.state.hasMore) {                
+        {/* <ScrollView onScroll={({ nativeEvent }) => {
+          if (this._isCloseToBottom(nativeEvent) && this.state.hasMore) {      
+              console.log(nativeEvent);          
               this._getAccountList();
           }}}> 
           {this._renderList()} 
+        </ScrollView> */}
+        <ScrollView onScroll={this.handleScroll}>
+          {accountList.map(account => {
+            const { id, email, first_name } = account;
+            return (
+              <View key={id}>
+                {this.AccountListItem(id, email, first_name)}
+              </View>
+            );
+          })}
         </ScrollView>
+        {isLoading && (
+          <View>
+            <View>
+              <Text>Loading...</Text>
+            </View>
+          </View>
+        )}
       </Container>
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  isLoading: state.accountListState.isLoading,
+  error: state.accountListState.error,
+  accountList: state.accountListState.accountList,
+  currentPage: state.accountListState.currentPage,
+  totalPages: state.accountListState.totalPages
+});
+
+// const mapDispatchToProps = (dispatch) => {
+//   const { current_page } = this.state
+//   return bindActionCreators({fetchActionCreator: loadAccountList, loadMoreActionCreator: loadMoreAccount(current_page)}, dispatch);
+// };
+
+const mapDispateToProps = (dispatch) => {
+  return {
+    fetchActionCreator: () => dispatch(loadAccountList()),
+    loadMoreActionCreator: (current_page) => dispatch(loadMoreAccount(current_page))
+  }
+}
+
+export default connect(mapStateToProps, mapDispateToProps)(AccountListScreen);

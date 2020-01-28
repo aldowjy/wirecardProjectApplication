@@ -27,7 +27,7 @@ export default class SingleTransferScreen extends Component {
   }
 
   async getAccount() {
-    return fetch('http://127.0.0.1:3000/posts')
+    return fetch('http://102.27.1.1:3000/posts')
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({

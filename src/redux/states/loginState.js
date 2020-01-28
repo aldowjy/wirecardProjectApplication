@@ -1,3 +1,4 @@
 export default {
-    loginStatus: false
+    loginStatus: false,
+    lastLogin: null
 }

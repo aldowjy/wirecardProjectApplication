@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { Alert } from 'react-native';
 import { Container, View, Content, Text, Form, Icon } from 'native-base';
-import { connect } from 'react-redux';
-import { callRequest } from '../../redux/actions/generalAction';
 import { languages } from '../../helpers/language';
 import { styles } from './style';
-import LoginInput from './LoginInput';
+import WInput from '../../components/WInput';
 import WButton from '../../components/WButton';
 
 class LoginScreen extends Component {
@@ -17,7 +15,16 @@ class LoginScreen extends Component {
   }
   
   render() {
-    const { navigation, callService } = this.props;
+    const { navigation } = this.props;
+
+    const parameter= {
+      url: 'http://102.27.1.1:3000/',
+      method: 'GET',
+      params: this.state.params,
+      callbackSuccess: () => navigation.navigate('HomeScreen'),
+      callbackError: () => Alert.alert('Alert', 'The Credential is Failed')
+    }
+
     return (
       <Container style={styles.container}>
         <Content>
@@ -30,13 +37,13 @@ class LoginScreen extends Component {
               </View>
               <View style={styles.viewContentBody}>
                 <Form>
-                    <LoginInput icon="briefcase" placeholder={languages.inputCompanyId} change={value => this.setState({params: {...this.state.params, companyId: value}})} value={this.state.params.companyId}/>
-                    <LoginInput icon="person" placeholder={languages.inputUserId} change={value => this.setState({params: {...this.state.params, userId: value}})} value={this.state.params.userId}/>
-                    <LoginInput icon="lock" placeholder={languages.inputPassword} change={value => this.setState({params: {...this.state.params, password: value}})} value={this.state.params.password} maxLength={8} isPassword/>
+                    <WInput icon="briefcase" placeholder={languages.inputCompanyId} change={value => this.setState({params: {...this.state.params, companyId: value}})} value={this.state.params.companyId} loginForm/>
+                    <WInput icon="person" placeholder={languages.inputUserId} change={value => this.setState({params: {...this.state.params, userId: value}})} value={this.state.params.userId} loginForm/>
+                    <WInput icon="lock" placeholder={languages.inputPassword} change={value => this.setState({params: {...this.state.params, password: value}})} value={this.state.params.password} maxLength={8} loginForm isPassword/>
                 </Form>
                 <View style={styles.viewButton}>
-                  <WButton style={styles.buttonGeneral} text={languages.buttonClear}/>
-                  <WButton style={styles.buttonConfirm} text={languages.buttonConfirm} onPress={() => { callService('http://127.0.0.1:3000/users/', 'GET', this.state.params, () => navigation.navigate('HomeScreen'), () => Alert.alert('Alert', 'The Credential is Failed'))}}/>
+                  <WButton style={styles.buttonGeneral} text={languages.buttonClear} onPress={() => Alert.alert('UPS!')}/>
+                  <WButton style={styles.buttonConfirm} text={languages.buttonConfirm} isService parameter={parameter}/>
                 </View>
                 <View style={styles.viewForgot}>
                   <Icon name='lock' style={styles.viewForgotIcon}/>
@@ -58,10 +65,4 @@ class LoginScreen extends Component {
   }
 }
 
-const mapDispateToProps = (dispatch) => {
-  return {
-    callService: (url, method, params, callbackSuccess, callbackError) => dispatch(callRequest(url, method, params, callbackSuccess, callbackError)),
-  }
-}
-
-export default connect(null, mapDispateToProps)(LoginScreen)
+export default LoginScreen
