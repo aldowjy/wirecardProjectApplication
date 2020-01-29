@@ -2,12 +2,14 @@ import loginState from './loginState';
 import requestState from './requestState';
 import validationState from './validationState';
 import accountListState from './accountListState';
+import accountState from './accountState';
 
-const globalState = {
+const initState = {
     loginState,
     requestState,
     validationState,
-    accountListState
+    accountListState,
+    accountState
 }
 
-export default globalState;
+export default initState;

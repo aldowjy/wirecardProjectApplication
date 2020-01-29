@@ -1,8 +1,9 @@
 import { SET_LOGIN, SET_LOGOUT } from '../types';
 
-export function setLogin(){
+export function setLogin(payload){
     return {
-        type:SET_LOGIN
+        type:SET_LOGIN,
+        payload
     };
 }
 

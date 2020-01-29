@@ -6,6 +6,8 @@ import { loginReducers } from './reducers/loginReducer';
 import { requestReducers } from './reducers/requestReducer';
 import { validationReducers } from './reducers/validationReducer';
 import { accountListReducers } from './reducers/accountListReducer';
+import { accountReducers } from './reducers/accountReducer';
+import logger from 'redux-logger';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -13,7 +15,8 @@ const appRedux = combineReducers({
   loginState: loginReducers,
   requestState: requestReducers,
   validationState: validationReducers,
-  accountListState: accountListReducers
+  accountListState: accountListReducers,
+  accountState: accountReducers
 });
 
 function configureStore(initialState = initState) {

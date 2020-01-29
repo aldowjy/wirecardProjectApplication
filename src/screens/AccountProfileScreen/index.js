@@ -1,10 +1,12 @@
-import React, { Component } from 'react'
-import { TouchableOpacity } from 'react-native'
-import { Container, View, Header, Content, Form, Thumbnail, Left, Button, Icon, Body, Title, Right, Item, Label, Input, Text } from 'native-base'
-import { Alert } from 'react-native'
-import ImagePicker from 'react-native-image-picker'
-import { languages } from '../../helpers/language'
-import { styles } from './style'
+import React, { Component } from 'react';
+import { TouchableOpacity } from 'react-native';
+import { Container, View, Header, Content, Form, Thumbnail, Left, Button, Icon, Body, Title, Right, Item, Label, Input, Text } from 'native-base';
+import { connect } from 'react-redux';
+import ImagePicker from 'react-native-image-picker';
+import { languages } from '../../helpers/language';
+import { styles } from './style';
+import * as selectors from '../../helpers/selector';
+import { createStructuredSelector } from 'reselect';
 
 class AccountProfileScreen extends Component {
   constructor(props) {
@@ -75,7 +77,7 @@ class AccountProfileScreen extends Component {
 
   render() {
     const { filePath } = this.state;
-
+    const image = 'https://facebook.github.io/react-native/docs/assets/favicon.png';
     const isEdit = this.state.isEdit;
     let button;
 
@@ -112,19 +114,19 @@ class AccountProfileScreen extends Component {
             <Form>
                 <Item fixedLabel style={styles.inputItem}>
                   <Label>{languages.userIdLabel}</Label>
-                  <Input placeholder={languages.inputUserId} onChangeText={(userId) => this.setState({userId})} value={this.state.userId} style={isEdit ? null : styles.inputEdit} disabled={this.state.isEdit}/>
+                  <Input placeholder={languages.inputUserId} onChangeText={(userId) => this.setState({userId})} value={this.props.accountUser.userId} style={isEdit ? null : styles.inputEdit} disabled={this.state.isEdit}/>
                 </Item>
                 <Item fixedLabel style={styles.inputItem}>
                   <Label>{languages.usernameLabel}</Label>
-                  <Input placeholder={languages.inputUsername}  onChangeText={(userName) => this.setState({userName})} value={this.state.userName} style={isEdit ? null : styles.inputEdit} disabled={this.state.isEdit}/>
+                  <Input placeholder={languages.inputUsername}  onChangeText={(userName) => this.setState({userName})} value={this.props.accountUser.username} style={isEdit ? null : styles.inputEdit} disabled={this.state.isEdit}/>
                 </Item>
                 <Item fixedLabel style={styles.inputItem}>
                   <Label>{languages.emailLabel}</Label>
-                  <Input placeholder={languages.inputEmail}  onChangeText={(email) => this.setState({email})} value={this.state.email} style={isEdit ? null : styles.inputEdit} disabled={this.state.isEdit}/>
+                  <Input placeholder={languages.inputEmail}  onChangeText={(email) => this.setState({email})} value={this.props.accountUser.email} style={isEdit ? null : styles.inputEdit} disabled={this.state.isEdit}/>
                 </Item>
                 <Item fixedLabel style={styles.inputItem}>
                   <Label>{languages.phoneLabel}</Label>
-                  <Input placeholder={languages.inputPhone}  onChangeText={(phone) => this.setState({phone})} value={this.state.phone} style={isEdit ? null : styles.inputEdit} disabled={this.state.isEdit}/>
+                  <Input placeholder={languages.inputPhone}  onChangeText={(phone) => this.setState({phone})} value={this.props.accountUser.phone} style={isEdit ? null : styles.inputEdit} disabled={this.state.isEdit}/>
                 </Item>
             </Form>
             <View style={styles.viewButton}>
@@ -138,4 +140,8 @@ class AccountProfileScreen extends Component {
   }
 }
 
-export default AccountProfileScreen
+const mapStateToProps = createStructuredSelector({
+    accountUser: selectors.makeSelectAccountUser,
+})
+
+export default connect(mapStateToProps, null)(AccountProfileScreen)
