@@ -59,7 +59,7 @@ const Drawer = createDrawerNavigator({
   contentComponent: SidebarMenu
 })
 
-export const ScreenStack = createStackNavigator({
+const ScreenStack = createStackNavigator({
   LoginScreen: {
     screen: Login,
     navigationOptions: {

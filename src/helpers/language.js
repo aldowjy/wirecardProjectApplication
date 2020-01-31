@@ -6,7 +6,7 @@ export const languages = {
     inputPassword: 'Enter Password*',
     buttonClear: 'Clear',
     buttonLogin: 'Login',
-    welcome: 'WELCOME',
+    welcome: 'WELCOME TO',
     bni: 'BNIDirect',
     corporate: 'Corporate Mobile Banking',
     forgot: 'Forgot Password?',
