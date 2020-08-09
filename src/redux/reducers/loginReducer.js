@@ -10,6 +10,7 @@ function getCurrentDate(){
 export function loginReducers(state = loginState, action) {
     switch(action.type){
         case SET_LOGIN : {
+            console.log(state)
             return state
             .setIn(['accountUser'], fromJS(action.payload))
             .setIn(['loginStatus'], true)

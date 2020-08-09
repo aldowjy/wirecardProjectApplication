@@ -15,15 +15,14 @@ export const languages = {
     loginFooterCompany: '2018 Wirecard Technology Indonesia',
 
     //Home Screen
-    title: 'NativePrism',
-    description: 'Wirecard Technology Indonesia',
-    lastLogin: 'Last Login: ',
+    recentActivityLabel: 'Recent Activity',
+    pendingTaskLabel: 'Pending Task',
+    inboxLabel: 'Inbox',
     menu: 'MENU',
     welcoming: 'Welcome, ',
-    from: 'from',
-    companyId: 'Company Id: ',
-    companyName: 'Company Name: ',
-    userId: 'User Id: ',
+    companyId: 'Company Id',
+    companyName: 'Company Name',
+    userId: 'User Id',
 
     singleTransfer: 'Single Transfer',
     fromAccount: 'From Account',

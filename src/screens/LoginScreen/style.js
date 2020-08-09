@@ -1,89 +1,89 @@
+import variables from '../../themes/variables';
+import commons from '../../themes/commons';
+
 export const styles = {
-  container: {
-    backgroundColor: '#f2e8da'
-  },
-  viewContainer: {
-    flex: 1,
+  containerView: {
     flexDirection: 'column',
-    justifyContent: 'space-between',
-  },
-  viewContent: {
-    backgroundColor: '#006884',
-    borderRadius: 20,
-    marginHorizontal: 30,
-    marginVertical: 20
-  },
-  viewContentHeader: {
-    alignItems: 'center',
-    alignSelf: 'center',
-    marginVertical: 10
-  },
-  viewContentHeaderWelcome: {
-    color: '#ffffff',
-    fontSize: 15,
-    letterSpacing: 10
-  },
-  viewContentHeaderName: {
-    color: '#ffffff',
-    fontWeight: 'bold',
-    fontSize: 40
-  },
-  viewContentHeaderLong: {
-    color: '#ffffff'
-  },
-  viewContentBody: {
-    backgroundColor: 'white',
-    padding: 30
-  },
-  viewContentFooter: {
-    height: 20,
+    justifyContent: 'space-between'
   },
 
-  viewButton: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginVertical: 10
+  headerView: {
+    height: 62,
+    justifyContent: 'flex-start'
   },
-  buttonGeneral: {
-    backgroundColor: '#f15921',
-    width: 120,
-    height: 40,
-    justifyContent: 'center',
+  headerImageView: {
+    width: '90%',
+    height: 80,
+    top: -11,
+    left: -12
+  },
+
+  contentView: {
+    backgroundColor: variables.turquoiseColor,
     borderRadius: 20,
+    marginHorizontal: 30
+  },
+  contentHeaderView: {
+    alignItems: 'center',
+    marginVertical: 15
+  },
+  contentHeaderWelcomeView: {
+    color: variables.whiteColor,
+    fontSize: 15,
+    letterSpacing: 10,
+    fontFamily: variables.generalFont
+  },
+  contentHeaderNameView: {
+    color: variables.whiteColor,
+    fontWeight: 'bold',
+    fontSize: 40,
+    fontFamily: variables.generalFont
+  },
+  contentHeaderLongView: {
+    color: variables.whiteColor,
+    fontFamily: variables.generalFont
+  },
+
+  contentBodyView: {
+    backgroundColor: variables.whiteColor,
+    paddingHorizontal: 30,
+    paddingVertical: 20,
+    marginBottom: 30,
+  },
+
+  buttonView: {
+    justifyContent: 'space-around',
+    marginVertical: 15
+  },
+
+  buttonGeneral: {
+    ...commons.button,
+    backgroundColor: variables.orangeColor
   },
   buttonConfirm: {
-    backgroundColor: '#006884',
-    width: 120,
-    height: 40,
-    justifyContent: 'center',
-    borderRadius: 20,
+    ...commons.button,
+    backgroundColor: variables.turquoiseColor
   },
-  viewForgot: {
-    flex: 1,
-    flexDirection: 'row',
-    marginTop: 10,
-    marginHorizontal: 15,
+
+  forgotView: {
+    marginVertical: 10,
+    marginHorizontal: 15
   },
   viewForgotIcon: {
-    color: '#fed9a1'
+    color: variables.lightOrangeColor
   },
   viewText: {
     marginLeft: 15,
     paddingRight: 50
   },
   viewForgotTextLink: {
-    color: '#f15921'
+    color: variables.orangeColor
   },
   viewForgotText: {
-    fontSize: 12,
+    fontSize: 12
+  },
 
-  },
-  viewfooter: {
-    marginTop: 30
-  },
-  footerContent: {
-    textAlign: 'center',
-    paddingHorizontal: 50
+  footerView: {
+    justifyContent: 'space-around'
   }
 };

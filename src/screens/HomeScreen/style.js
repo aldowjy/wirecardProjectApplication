@@ -1,41 +1,51 @@
-export const styles = {
-    container: {
-      backgroundColor: '#f2e8da'
+import variables from '../../themes/variables';
+
+export default {
+    containerStatus: {
+      marginHorizontal: 50,
+      marginVertical: 30,
     },
-    viewNavbar: {
-      backgroundColor: '#f7931d'
+
+    viewStatus: {
+      justifyContent: 'center'
     },
-    viewContentHeader: {
-      backgroundColor: '#f7931d',
-      height: 200,
-      padding: 20,
-      borderBottomRightRadius: 100
+
+    iconColor: {
+      color: variables.turquoiseColor
     },
-    viewContentHeader1: {
-      color: '#ffffff',
-      fontSize: 20,
+    textStatus: {
+      top: 3,
+      color: variables.turquoiseColor,
+      fontWeight: 'bold',
+      marginHorizontal: 5,
+    },
+    badgeColor: {
+      backgroundColor: variables.mediumOrangeColor
+    },
+
+    containerRecent: {
+      marginHorizontal: 30
+    },
+    titleRecent: {
+      justifyContent: 'center',
+      backgroundColor: variables.lightOrangeColor,
+      height: 40,
+      paddingVertical: 10,
+      borderTopLeftRadius: 20,
+      borderTopRightRadius: 20
+    },
+    bodyRecent: {
+      backgroundColor: variables.whiteColor,
+      height: 500,
+      borderBottomLeftRadius: 20,
+      borderBottomRightRadius: 20
+    },
+    textList: {
       fontWeight: 'bold'
     },
-    viewContentHeader2: {
-      color: '#ffffff',
-      fontSize: 20,
-      marginTop: -12
-    },
-    viewContentHeader3: {
-      color: '#ffffff',
-      fontSize: 14,
-      alignSelf: 'center'
-    },
-    viewContentHeader4: {
-      color: '#ffffff',
-      fontSize: 14,
-      alignSelf: 'center'
-    },
-    viewContentBody: {
-      flex: 1,
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-      justifyContent: 'space-around',
-      alignContent: 'flex-start'
+    iconList: {
+      color: variables.mediumOrangeColor,
+      fontSize: 30,
+      padding: 10
     }
 }

@@ -106,7 +106,7 @@ export async function loadMoreAccountList(current) {
 export async function getAccountData(params){
     console.log('start ....', params.userId);
     return (
-        fetch('http://102.27.1.1:3000/users?userId='+params.userId, {
+        fetch('http://localhost:3000/users?userId='+params.userId, {
             method: 'GET',
             headers: {
                 Accept: 'application/json',

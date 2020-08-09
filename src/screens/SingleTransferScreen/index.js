@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import { Modal, TouchableOpacity } from 'react-native';
-import { Container, Content, View, Header, Left, Body, Title, Form, Item, Input, Text, Button, Icon, Right } from 'native-base';
+import { Content, View, Form, Item, Input, Text, Button, Icon } from 'native-base';
+import { Col, Row, Grid } from "react-native-easy-grid";
 import OwnAccountList from '../../components/OwnAccountList';
 import { languages } from '../../helpers/language';
 import { styles } from './style'
+import WContainer from '../../components/presentations/WContainer';
+import WButton from '../../components/WButton';
 
 export default class SingleTransferScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
         selected: true,
-        amount: 0.0,
-        post: [],
+        user: [],
         modalVisible: false,
-        selectedItem: {},
         name: ""
     };
   }
@@ -27,11 +28,11 @@ export default class SingleTransferScreen extends Component {
   }
 
   async getAccount() {
-    return fetch('http://102.27.1.1:3000/posts')
+    return fetch('http://localhost:3000/users')
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({
-          post: responseJson
+          user: responseJson
         })
       })
   }
@@ -46,92 +47,69 @@ export default class SingleTransferScreen extends Component {
   }
 
   render() {
+    const { navigation } = this.props;
+    const { user } = this.state;
+
     return (
-      <Container>
-        <Header style={{backgroundColor: '#f7931d'}}>
-          <Left>
-            <Button transparent onPress={() => this.props.navigation.goBack()}>
-              <Icon name='arrow-back' />
-            </Button>
-          </Left>
-          <Body style={{alignItems: 'center'}}>
-            <Title>{languages.singleTransfer}</Title>
-          </Body>
-          <Right>
-            <Button transparent onPress={() => this.props.navigation.goBack()}>
-              <Icon name='home' />
-            </Button>
-          </Right>
-        </Header>
-        <Content style={{margin: 15}}>
-          <View style={{marginTop: 22}}>
-            <Modal
-              animationType="slide"
-              transparent={true}
-              visible={this.state.modalVisible}>
-              <View style={{flex: 1,backgroundColor: 'rgba(0,0,0,0.2)'}}>
-                <View style ={{flex:1, justifyContent: 'flex-end'}}>
-                  <View style={styles.viewModalBody}>
-                    <Text style={{color: '#ffffff', fontWeight: 'bold'}}>{languages.fromAccount}</Text>
-                    <TouchableOpacity
-                      onPress={() => {
-                        this.setModalVisible(!this.state.modalVisible);
-                      }}>
-                      <Icon name='close' style={{color: '#ffffff'}}></Icon>
-                    </TouchableOpacity>
-                  </View>
-                  <View style={{backgroundColor: '#ffffff'}}>
-                    {
-                      this.state.post.map(post => {
-                        return <OwnAccountList key={post.id} number={post.accountNumber} name={post.userName} currency={post.account.currency} id={post.id} check={this.handlerCheck}/>
-                      })
-                    }
+      <WContainer navigation={navigation} leftIcon='arrow-back' rightIcon='home' title={languages.singleTransfer} onClickLeft={() => navigation.goBack()} onClickRight={() => navigation.navigate('HomeScreen')}>
+        <Grid>
+          <Col style={{marginHorizontal: 30, marginTop: 30}}>
+            <Row style={styles.titleForm}>
+              <Text>{languages.recentActivityLabel}</Text>
+            </Row>
+            <Row style={styles.bodyForm}>
+              <Content>
+                <Form style={{margin: 20}}>
+                  <Item rounded style={{marginBottom: 20, borderColor: '#f7931d'}}>
+                    <View style={{flexDirection: 'row'}}>
+                      <TouchableOpacity style={{paddingVertical: 10, paddingHorizontal: 20, flex: 1}}
+                        onPress={() => { this.setModalVisible(true); }}>
+                        <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+                          <Text>{this.state.name}</Text>
+                          <Icon name='search' style={{color: '#f7931d'}}></Icon>
+                        </View>
+                      </TouchableOpacity>
+                    </View>
+                  </Item>
+                  <Item rounded style={{paddingHorizontal: 15, marginBottom: 20, borderColor: '#f7931d'}} last>
+                    <Input placeholder="Amount*" keyboardType="numeric"></Input>
+                  </Item>
+                </Form>
+              </Content>
+            </Row>
+            <Row style={styles.buttonView}>
+              <WButton style={styles.buttonGeneral} text={languages.buttonWorkflow}/>
+              <WButton style={styles.buttonConfirm} text={languages.buttonConfirm}/>
+            </Row>
+            <Col>
+              <Modal animationType="slide" transparent={true} visible={this.state.modalVisible}>
+                <View style={{flex: 1}}>
+                  <View style ={{flex:1, justifyContent: 'flex-end'}}>
+                    <View style={styles.viewModalBody}>
+                      <Text style={{color: '#ffffff', fontWeight: 'bold'}}>{languages.fromAccount}</Text>
+                      <TouchableOpacity
+                        onPress={() => {
+                          this.setModalVisible(!this.state.modalVisible);
+                        }}>
+                        <Icon name='close' style={{color: '#ffffff'}}></Icon>
+                      </TouchableOpacity>
+                    </View>
+                    <View style={{backgroundColor: '#ffffff', height: 300}}>
+                      <Content>
+                      {
+                        user.map(user => {
+                          return <OwnAccountList key={user.id} number={user.accountNumber} name={user.username} currency={user.infoAccount.currency} id={user.id} check={this.handlerCheck}/>
+                        })
+                      }
+                      </Content>
+                    </View>
                   </View>
                 </View>
-              </View>
-            </Modal>
-          </View>
-          <Form>
-            <Item rounded style={{marginBottom: 20, borderColor: '#f7931d'}}>
-              <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <TouchableOpacity style={{paddingVertical: 10, paddingHorizontal: 20, flex: 1}}
-                  onPress={() => {
-                    this.setModalVisible(true);
-                  }}>
-                  <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-                    <Text>{this.state.name}</Text>
-                    <Icon name='search' style={{color: '#f7931d'}}></Icon>
-                  </View>
-                </TouchableOpacity>
-              </View>
-            </Item>
-            <Item rounded style={{marginBottom: 20, borderColor: '#f7931d'}}>
-              <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <TouchableOpacity style={{paddingVertical: 10, paddingHorizontal: 20, flex: 1}}
-                  onPress={() => {
-                    this.setModalVisible(true);
-                  }}>
-                  <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-                    <Text>To Account*</Text>
-                    <Icon name='search' style={{color: '#f7931d'}}></Icon>
-                  </View>
-                </TouchableOpacity>
-              </View>
-            </Item>
-            <Item rounded style={{paddingHorizontal: 15, marginBottom: 20, borderColor: '#f7931d'}} last>
-              <Input placeholder="Amount*" keyboardType="numeric"></Input>
-            </Item>
-            <View style={styles.viewButton}>
-              <Button rounded style={styles.buttonWorkflow}>
-                  <Text uppercase={false}>{languages.buttonWorkflow}</Text>
-              </Button>
-              <Button rounded style={styles.buttonConfirm}>
-                  <Text uppercase={false}>{languages.buttonConfirm}</Text>
-              </Button>
-            </View>
-          </Form>
-        </Content>
-      </Container>
+              </Modal>
+            </Col>
+          </Col>
+        </Grid>
+      </WContainer>
     );
   }
 }

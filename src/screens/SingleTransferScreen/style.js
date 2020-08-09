@@ -1,3 +1,6 @@
+import variables from '../../themes/variables';
+import commons from '../../themes/commons';
+
 export const styles = {
     viewModalBody: {
         justifyContent: 'space-between',
@@ -6,21 +9,34 @@ export const styles = {
         flexDirection: 'row',
         paddingHorizontal: 30,
         paddingVertical: 10,
-        backgroundColor: '#f7931d'
+        backgroundColor: '#f7931d',
     },
-    viewButton: {
+    buttonView: {
         justifyContent: 'space-around',
-        flex: 1,
-        flexDirection: 'row'
+        marginVertical: 15
     },
-    buttonWorkflow: {
-        justifyContent: 'center',
-        backgroundColor: '#f15921',
-        width: 160
+
+    buttonGeneral: {
+        ...commons.button,
+        backgroundColor: variables.orangeColor
     },
     buttonConfirm: {
+        ...commons.button,
+        backgroundColor: variables.turquoiseColor
+    },
+
+    titleForm: {
         justifyContent: 'center',
-        backgroundColor: '#006884',
-        width: 160
-    }
+        backgroundColor: variables.lightOrangeColor,
+        height: 40,
+        paddingVertical: 10,
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20
+    },
+    bodyForm: {
+        backgroundColor: variables.whiteColor,
+        height: 500,
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20
+    },
 }

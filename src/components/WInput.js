@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Item, Icon, Input } from 'native-base';
+import { TouchableOpacity } from 'react-native';
 
 export default class WInput extends Component {
     _loginForm() {
@@ -9,7 +10,7 @@ export default class WInput extends Component {
     }
     _renderEye() {
         if (this.props.isPassword) {
-            return <Icon name='eye' style={this.props.messageError ? styles.eyeColorError : styles.eyeColor}/>
+            return <TouchableOpacity><Icon name='eye' style={this.props.messageError ? styles.eyeColorError : styles.eyeColor}/></TouchableOpacity>
         }
     }
 

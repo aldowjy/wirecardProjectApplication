@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { TouchableOpacity } from 'react-native'
-import { Container, Content, View, Text, Icon } from 'native-base';
+import { Container, Content, Text, Icon } from 'native-base';
+import { Col, Row, Grid } from "react-native-easy-grid";
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
 import { languages } from '../helpers/language';
+import * as selectors from '../helpers/selector';
+import { createStructuredSelector } from 'reselect';
 
 class SideBarMenu extends Component {
   constructor(props) {
@@ -21,7 +24,7 @@ class SideBarMenu extends Component {
   }
 
   async _getMenu() {
-    return fetch('http://102.27.1.1:3000/menu')
+    return fetch('http://localhost:3000/menu')
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({
@@ -35,49 +38,60 @@ class SideBarMenu extends Component {
   }
 
   render() {
+    const { userId } = this.props.accountUser;
+    const { companyId, name } = this.props.accountUser.company;
+    const { postMenu } = this.state;
+
     return (
-      <Container style={styles.container}>
-        <View style={styles.titleBar}>
-          <Text style={{color: '#fff'}}>{languages.menu}</Text>
-          <Icon style={{color: '#fff'}} name='close' onPress={() => this.props.navigation.closeDrawer()}/>
-        </View>
-        <View style={styles.headerBar}>
-          <View style={styles.headerLogoBar}>
-            <Icon style={{color: '#fff'}} name='person'/>
-          </View>
-          <View style={styles.viewWelcome}>
-            <Text style={{color: '#006884'}}>{languages.welcoming}</Text>
-            <Text style={{color: '#006884', fontWeight: 'bold'}}>userId</Text>
-          </View>
-        </View>
-        <View style={styles.statusBar}>
-          <View style={styles.viewStatus}>
-            <Text style={styles.viewLabel}>{languages.companyId}&emsp;&emsp;&emsp;</Text>
-            <Text style={styles.viewValue}>companyId</Text>
-          </View>
-          <View style={styles.viewStatus}>
-            <Text style={styles.viewLabel}>{languages.companyName}&emsp;</Text>
-            <Text style={styles.viewValue}>companyName</Text>
-          </View>
-          <View style={styles.viewStatus}>
-            <Text style={styles.viewLabel}>{languages.userId}&emsp;&emsp;&emsp;&emsp;&emsp;</Text>
-            <Text style={styles.viewValue}>userId</Text>
-          </View>
-        </View>
-        <Content style={styles.menuBar}>
-          <View style={{width: '100%'}}>
+      <Container>
+        <Grid>
+          <Row style={styles.titleBar} size={4}>
+            <Text style={{color: '#fff', alignSelf: 'center'}}>{languages.menu}</Text>
+            <Icon style={{color: '#fff'}} name='close' onPress={() => this.props.navigation.closeDrawer()}/>
+          </Row>
+          <Row style={styles.headerBar} size={6}>
+            <Row style={styles.headerLogoBar} size={10}>
+              <Icon style={{color: '#fff'}} name='person'/>
+            </Row>
+            <Row style={styles.viewWelcome} size={90}>
+              <Text style={{color: '#006884'}}>{languages.welcoming}</Text>
+              <Text style={{color: '#006884', fontWeight: 'bold'}} numberOfLines={1}>{userId}</Text>
+            </Row>
+          </Row>
+          <Col style={styles.statusBar} size={10}>
+            <Row style={styles.viewStatus}>
+              <Col><Text style={styles.viewLabel}>{languages.companyId}</Text></Col>
+              <Col><Text style={styles.viewValue} numberOfLines={1}>: {companyId}</Text></Col>
+            </Row>
+            <Row style={styles.viewStatus}>
+              <Col><Text style={styles.viewLabel}>{languages.companyName}</Text></Col>
+              <Col><Text style={styles.viewValue} numberOfLines={1}>: {name}</Text></Col>
+            </Row>
+            <Row style={styles.viewStatus}>
+              <Col><Text style={styles.viewLabel}>{languages.userId}</Text></Col>
+              <Col><Text style={styles.viewValue} numberOfLines={1}>: {userId}</Text></Col>
+            </Row>
+          </Col>
+          <Row size={80}>
+            <Content>
               {
-                this.state.postMenu.map(post => {
+                postMenu.map(post => {
                   return <TouchableOpacity onPress={this.navigateToScreen(post.menuScreen)} key={post.menuId}>
-                            <View style={styles.menuView}>
-                              <Icon name={post.menuIcon} style={styles.sideMenuIcon}/>
-                              <Text style={styles.menuText}>{post.menuName}</Text>
-                            </View>
+                            <Row>
+                              <Row size={25}>
+                                <Icon name={post.menuIcon} style={styles.sideMenuIcon}/>
+                              </Row>
+                              <Row style={styles.sideView} size={75}>
+                                <Text style={styles.sideMenuText}>{post.menuName}</Text>
+                                <Icon name='md-arrow-dropright' style={styles.sideMenuIcon}/>
+                              </Row>
+                            </Row>
                           </TouchableOpacity>
                 })
               }
-          </View>
-        </Content>
+            </Content>
+          </Row>
+        </Grid>
       </Container>
     );
   }
@@ -91,27 +105,18 @@ class SideBarMenu extends Component {
 //   }
 // }
 
-export default SideBarMenu
+const mapStateToProps = createStructuredSelector({
+  accountUser: selectors.makeSelectAccountUser,
+})
+
+export default connect(mapStateToProps, null)(SideBarMenu)
 
 const styles = {
-  container: {
-    flex: 1,
-    flexDirection: 'column'
-  },
   titleBar: {
     backgroundColor: '#f7931d',
-    flexDirection: 'row',
-    width: '100%',
     justifyContent: 'space-between',
-    height: 50,
-    alignItems: 'center',
     paddingHorizontal: 20,
-  },
-  headerBar: {
-    backgroundColor: '#ffffff',
-    flexDirection: 'row',
-    width: '100%',
-    alignItems: 'center'
+    paddingVertical: 10,
   },
   headerLogoBar: {
     backgroundColor: '#006884',
@@ -122,52 +127,38 @@ const styles = {
   },
   statusBar: {
     backgroundColor: '#fed9a1',
-    paddingLeft: 75,
+    paddingLeft: 50,
     paddingRight: 10,
     paddingVertical: 5,
   },
   viewWelcome: {
     paddingHorizontal: 15,
-    flexDirection:'row'
+    alignSelf: 'center',
   },
   viewStatus: {
-    flexDirection:'row',
-    paddingVertical: 2
+    paddingVertical: 3
   },
   viewLabel: {
-    color: '#000000',
     fontSize: 12
   },
   viewValue: {
-    color: '#000000',
     fontSize: 12,
     fontWeight: 'bold'
   },
-  menuBar: {
-    width: '100%',
-    height: '100%',
-    backgroundColor: '#fff',
-  },
   sideMenuIcon: {
-    marginRight: 10,
-    marginLeft: 20,
-    fontSize: 21
+    marginHorizontal: 20,
+    fontSize: 26,
+    alignSelf: 'center',
   },
-  menuLine: {
-    width: '100%',
-    height: 1,
-    backgroundColor: '#e2e2e2',
-  },
-  menuView: {
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  menuText:{
-    fontSize: 14,
-    paddingVertical: 15,
-    width: '100%',
+  sideView: {
+    justifyContent: 'space-between',
     borderStyle: 'solid',
     borderBottomWidth: 1,
     borderBottomColor: '#cccccc',
+    paddingVertical: 15,
+  },
+  sideMenuText:{
+    fontSize: 14,
+    alignSelf: 'center',
   }
 };
